@@ -16,6 +16,7 @@ import Login from "./Backend/Login";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
 import Dashboard from "./Backend/Dashboard";
 import { ToastContainer } from "react-toastify";
+import EventDetail from './pages/EventDetail';
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App: React.FC = () => (
             <Route path="/academics" element={<Academics />} />
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/news" element={<News />} />
+            <Route path="/news/:id/:slug" element={<EventDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />

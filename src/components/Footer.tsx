@@ -17,7 +17,7 @@ const Footer = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Newsletter Section */}
-        <div className="bg-gradient-to-r from-school-blue-dark to-school-blue text-white rounded-2xl p-8 md:p-10 max-w-5xl mx-auto mb-16 shadow-xl transform -translate-y-20">
+        {/* <div className="bg-gradient-to-r from-school-blue-dark to-school-blue text-white rounded-2xl p-8 md:p-10 max-w-5xl mx-auto mb-16 shadow-xl transform -translate-y-20">
           <div className="grid md:grid-cols-5 gap-8 items-center">
             <div className="md:col-span-3">
               <h2 className="text-2xl md:text-3xl font-display font-semibold mb-4">
@@ -40,7 +40,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         
         {/* Main Footer */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16 mb-16">
