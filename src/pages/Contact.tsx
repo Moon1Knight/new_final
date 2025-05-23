@@ -1,10 +1,8 @@
-
 import React, { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
 import ContactInformation from '@/components/contact/ContactInformation';
-import ContactForm from '@/components/contact/ContactForm';
 import LocationMap from '@/components/contact/LocationMap';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Mail, Phone } from 'lucide-react';
@@ -109,25 +107,25 @@ const Contact = () => {
       
       {/* Connect with us banner */}
       <div className="bg-gray-50 border-b border-gray-100">
-        <div className="container mx-auto py-6 px-4">
-          <div className="flex flex-wrap items-center justify-center md:justify-between">
-            <p className="text-gray-600 mb-4 md:mb-0">Get in touch with us through any of these channels:</p>
-            <div className="flex space-x-6">
-              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors">
-                <Mail className="h-5 w-5 mr-2" /> avenuesglobalschool@gmail.com
+        <div className="container mx-auto py-4 sm:py-6 px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
+            <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left">Get in touch with us through any of these channels:</p>
+            <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
+              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors text-sm sm:text-base">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-2" /> avenuesglobalschool@gmail.com
               </a>
-              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors">
-                <Phone className="h-5 w-5 mr-2" /> +91 7997043399
+              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors text-sm sm:text-base">
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-2" /> +91 7997043399
               </a>
-              <div className="hidden md:flex items-center space-x-4">
+              <div className="flex items-center space-x-4">
                 <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Facebook className="h-5 w-5" />
+                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
                 <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Instagram className="h-5 w-5" />
+                  <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
                 <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Twitter className="h-5 w-5" />
+                  <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
               </div>
             </div>
@@ -136,32 +134,30 @@ const Contact = () => {
       </div>
       
       <motion.div 
-        className="py-16"
+        className="py-8 sm:py-12 md:py-16"
         initial="hidden"
         animate={isLoaded ? "visible" : "hidden"}
         variants={containerVariants}
       >
         <div className="container mx-auto px-4">
-          <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-12">
-            <p className="text-xl text-gray-600">
+          <motion.div variants={itemVariants} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+            <p className="text-lg sm:text-xl text-gray-600">
               We'd love to hear from you. Get in touch with us for any inquiries or to schedule a visit to our campus.
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <motion.div variants={itemVariants} className="lg:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8">
+            <motion.div variants={itemVariants} className="md:col-span-1 lg:col-span-2">
               <ContactInformation />
             </motion.div>
             
-            <motion.div variants={itemVariants} className="lg:col-span-3">
-              <ContactForm />
+            <motion.div variants={itemVariants} className="md:col-span-2 lg:col-span-3">
+              <h2 className="text-xl sm:text-2xl font-display font-semibold text-center mb-6 sm:mb-8">Find Us</h2>
+              <div className="h-[300px] sm:h-[400px] md:h-[500px]">
+                <LocationMap />
+              </div>
             </motion.div>
           </div>
-          
-          <motion.div variants={itemVariants} className="mt-12">
-            <h2 className="text-2xl font-display font-semibold text-center mb-8">Find Us</h2>
-            <LocationMap />
-          </motion.div>
         </div>
       </motion.div>
       

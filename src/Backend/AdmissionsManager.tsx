@@ -30,6 +30,7 @@ import { collection, getDocs, updateDoc, doc, deleteDoc, Timestamp } from 'fireb
 import { db } from '../config/firebase';
 import { toast } from 'react-toastify';
 
+// Admission interface update: timestamp is now string (formatted date)
 interface Admission {
   id: string;
   studentName: string;
@@ -37,14 +38,25 @@ interface Admission {
   phone: string;
   grade: string;
   status: 'pending' | 'approved' | 'rejected';
-  timestamp: Timestamp;
+  timestamp: string; // <-- changed from Timestamp to string (formatted date)
   dob?: string;
   gender?: string;
+  address?: string;
 }
 
 interface DetailItemProps {
   label: string;
   value: string | undefined;
+}
+
+// Helper function: converts Firestore Timestamp to dd/mm/yyyy string
+function convertTimestamp(timestamp: Timestamp | undefined): string {
+  if (!timestamp) return 'N/A';
+  const date = timestamp.toDate();
+  const dd = date.getDate().toString().padStart(2, '0');
+  const mm = (date.getMonth() + 1).toString().padStart(2, '0');
+  const yyyy = date.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
 }
 
 const AdmissionsManager: React.FC = () => {
@@ -61,11 +73,17 @@ const AdmissionsManager: React.FC = () => {
     try {
       const admissionsCollection = collection(db, 'admissions');
       const admissionsSnapshot = await getDocs(admissionsCollection);
-      const admissionsList = admissionsSnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Admission[];
+      const admissionsList = admissionsSnapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          // convert timestamp once here to string in dd/mm/yyyy format
+          timestamp: convertTimestamp(data.timestamp),
+        };
+      }) as Admission[];
       setAdmissions(admissionsList);
+      console.log('Fetched admissions:', admissionsList);
     } catch (error) {
       console.error('Error fetching admissions:', error);
       toast.error('Failed to fetch admissions');
@@ -108,7 +126,7 @@ const AdmissionsManager: React.FC = () => {
 
   const handleDeleteConfirm = async (): Promise<void> => {
     if (!admissionToDelete) return;
-    
+
     try {
       const admissionRef = doc(db, 'admissions', admissionToDelete.id);
       await deleteDoc(admissionRef);
@@ -128,15 +146,6 @@ const AdmissionsManager: React.FC = () => {
     setAdmissionToDelete(null);
   };
 
-  const getStatusChip = (params: GridRenderCellParams): JSX.Element => (
-    <Chip
-      label={params.value || 'pending'}
-      color={getStatusChipColor(params.value as string)}
-      size="small"
-      sx={{ fontWeight: 500 }}
-    />
-  );
-
   const getStatusChipColor = (status: string): 'warning' | 'success' | 'error' | 'default' => {
     switch (status) {
       case 'pending': return 'warning';
@@ -146,31 +155,14 @@ const AdmissionsManager: React.FC = () => {
     }
   };
 
-  const formatDate = (params: GridRenderCellParams): string => {
-    if (!params.value) return 'N/A';
-    
-    try {
-      // Handle Firestore Timestamp objects
-      if (params.value.toDate && typeof params.value.toDate === 'function') {
-        return params.value.toDate().toLocaleDateString();
-      }
-      
-      // Handle Date objects or timestamp numbers
-      if (params.value instanceof Date) {
-        return params.value.toLocaleDateString();
-      }
-      
-      // Handle timestamp as numbers or strings
-      if (typeof params.value === 'number' || typeof params.value === 'string') {
-        return new Date(params.value).toLocaleDateString();
-      }
-      
-      return 'N/A';
-    } catch (error) {
-      console.error('Error formatting date:', error);
-      return 'Invalid Date';
-    }
-  };
+  const getStatusChip = (params: GridRenderCellParams): JSX.Element => (
+    <Chip
+      label={params.value || 'pending'}
+      color={getStatusChipColor(params.value as string)}
+      size="small"
+      sx={{ fontWeight: 500 }}
+    />
+  );
 
   const actionButtons = (params: GridRenderCellParams): JSX.Element => (
     <Box sx={{ display: 'flex', gap: 1 }}>
@@ -214,56 +206,19 @@ const AdmissionsManager: React.FC = () => {
   );
 
   const columns = [
-    { 
-      field: 'studentName', 
-      headerName: 'Student Name', 
-      flex: 1,
-      minWidth: 150,
-    },
-    { 
-      field: 'email', 
-      headerName: 'Email', 
-      flex: 1,
-      minWidth: 200,
-      hide: isMobile,
-    },
-    { 
-      field: 'phone', 
-      headerName: 'Phone', 
-      flex: 1,
-      minWidth: 130,
-      hide: isMobile,
-    },
-    { 
-      field: 'grade', 
-      headerName: 'Grade', 
+    { field: 'studentName', headerName: 'Student Name', flex: 1, minWidth: 150 },
+    { field: 'email', headerName: 'Email', flex: 1, minWidth: 200, hide: isMobile },
+    { field: 'phone', headerName: 'Phone', flex: 1, minWidth: 130, hide: isMobile },
+    { field: 'grade', headerName: 'Grade', flex: 1, minWidth: 120 },
+    { field: 'status', headerName: 'Status', flex: 1, minWidth: 120, renderCell: getStatusChip },
+    {
+      field: 'timestamp',
+      headerName: 'Date',
       flex: 1,
       minWidth: 120,
-    },
-    { 
-      field: 'status', 
-      headerName: 'Status', 
-      flex: 1,
-      minWidth: 120,
-      renderCell: getStatusChip,
-    },
-    { 
-      field: 'timestamp', 
-      headerName: 'Date', 
-      flex: 1,
-      minWidth: 120,
-      valueFormatter: formatDate,
       hide: isMobile,
     },
-    { 
-      field: 'actions', 
-      headerName: 'Actions', 
-      flex: 1,
-      minWidth: 180,
-      renderCell: actionButtons,
-      sortable: false,
-      filterable: false,
-    },
+    { field: 'actions', headerName: 'Actions', flex: 1, minWidth: 180, renderCell: actionButtons, sortable: false, filterable: false },
   ];
 
   const CustomToolbar: React.FC = () => (
@@ -275,7 +230,7 @@ const AdmissionsManager: React.FC = () => {
   );
 
   return (
-    <Box sx={{ 
+    <Box sx={{
       height: '80vh',
       width: '100%',
       p: { xs: 1, sm: 2 },
@@ -292,18 +247,12 @@ const AdmissionsManager: React.FC = () => {
         loading={loading}
         pageSizeOptions={[5, 10, 25]}
         initialState={{
-          pagination: {
-            paginationModel: { pageSize: 10, page: 0 },
-          },
+          pagination: { paginationModel: { pageSize: 10, page: 0 } },
         }}
-        slots={{
-          toolbar: CustomToolbar,
-        }}
+        slots={{ toolbar: CustomToolbar }}
         sx={{
           border: 'none',
-          '& .MuiDataGrid-cell': {
-            borderBottom: `1px solid ${theme.palette.divider}`,
-          },
+          '& .MuiDataGrid-cell': { borderBottom: `1px solid ${theme.palette.divider}` },
           '& .MuiDataGrid-columnHeaders': {
             bgcolor: theme.palette.grey[100],
             borderBottom: `2px solid ${theme.palette.divider}`,
@@ -318,79 +267,53 @@ const AdmissionsManager: React.FC = () => {
         onClose={handleClose}
         maxWidth="md"
         fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: 3,
-            boxShadow: theme.shadows[4],
-          }
-        }}
+        PaperProps={{ sx: { borderRadius: 3, boxShadow: theme.shadows[4] } }}
       >
         <DialogTitle sx={{ bgcolor: theme.palette.grey[100], fontWeight: 600 }}>
           Application Details
         </DialogTitle>
         <DialogContent dividers sx={{ p: 3 }}>
           {selectedAdmission && (
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3 }}>
-              <Box>
-                <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 600 }}>
-                  Student Information
-                </Typography>
-                <DetailItem label="Name" value={selectedAdmission.studentName} />
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 4 }}>
+              <Box sx={{ flex: 1 }}>
+                <DetailItem label="Student Name" value={selectedAdmission.studentName} />
+                <DetailItem label="Email" value={selectedAdmission.email} />
+                <DetailItem label="Grade" value={selectedAdmission.grade} />
                 <DetailItem label="Date of Birth" value={selectedAdmission.dob} />
                 <DetailItem label="Gender" value={selectedAdmission.gender} />
-                <DetailItem label="Grade Applied" value={selectedAdmission.grade} />
+                {/* Just render timestamp string - no toDate() call */}
+                <DetailItem label="Application Date" value={selectedAdmission.timestamp} />
+                <DetailItem label="Status" value={selectedAdmission.status} />
               </Box>
-              
-              <Box>
-                <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 600 }}>
-                  Contact Information
-                </Typography>
-                <DetailItem label="Email" value={selectedAdmission.email} />
+              <Box sx={{ flex: 1 }}>
                 <DetailItem label="Phone" value={selectedAdmission.phone} />
-                <Box sx={{ mt: 2 }}>
-                  <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 600 }}>
-                    Application Status
-                  </Typography>
-                  <Chip
-                    label={selectedAdmission.status}
-                    color={getStatusChipColor(selectedAdmission.status)}
-                    sx={{ px: 2, py: 1 }}
-                  />
-                </Box>
+                <DetailItem label="Address" value={selectedAdmission.address} />
               </Box>
             </Box>
           )}
         </DialogContent>
-        <DialogActions sx={{ p: 2, gap: 1 }}>
-          <Button 
-            onClick={handleClose}
-            variant="outlined"
-            sx={{ borderRadius: 2 }}
-          >
-            Close
-          </Button>
+        <DialogActions sx={{ px: 3, py: 2 }}>
           {selectedAdmission?.status === 'pending' && (
             <>
               <Button
-                onClick={() => handleStatusUpdate(selectedAdmission.id, 'approved')}
-                color="success"
                 variant="contained"
-                startIcon={<CheckCircle />}
-                sx={{ borderRadius: 2 }}
+                color="success"
+                onClick={() => handleStatusUpdate(selectedAdmission.id, 'approved')}
               >
                 Approve
               </Button>
               <Button
-                onClick={() => handleStatusUpdate(selectedAdmission.id, 'rejected')}
-                color="error"
                 variant="contained"
-                startIcon={<Cancel />}
-                sx={{ borderRadius: 2 }}
+                color="error"
+                onClick={() => handleStatusUpdate(selectedAdmission.id, 'rejected')}
               >
                 Reject
               </Button>
             </>
           )}
+          <Button onClick={handleClose} color="inherit">
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -398,38 +321,16 @@ const AdmissionsManager: React.FC = () => {
       <Dialog
         open={deleteDialogOpen}
         onClose={handleDeleteCancel}
-        maxWidth="xs"
-        fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: 3,
-            boxShadow: theme.shadows[4],
-          }
-        }}
       >
-        <DialogTitle sx={{ bgcolor: theme.palette.grey[100], fontWeight: 600 }}>
-          Confirm Deletion
-        </DialogTitle>
-        <DialogContent sx={{ pt: 2, mt: 1 }}>
-          <Typography variant="body1">
-            Are you sure you want to delete the application for {admissionToDelete?.studentName}? This action cannot be undone.
-          </Typography>
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          Are you sure you want to delete this application?
         </DialogContent>
-        <DialogActions sx={{ p: 2, gap: 1 }}>
-          <Button 
-            onClick={handleDeleteCancel}
-            variant="outlined"
-            sx={{ borderRadius: 2 }}
-          >
+        <DialogActions>
+          <Button onClick={handleDeleteCancel} color="inherit">
             Cancel
           </Button>
-          <Button
-            onClick={handleDeleteConfirm}
-            color="error"
-            variant="contained"
-            startIcon={<Delete />}
-            sx={{ borderRadius: 2 }}
-          >
+          <Button onClick={handleDeleteConfirm} color="error" variant="contained">
             Delete
           </Button>
         </DialogActions>
@@ -439,9 +340,11 @@ const AdmissionsManager: React.FC = () => {
 };
 
 const DetailItem: React.FC<DetailItemProps> = ({ label, value }) => (
-  <Box sx={{ mb: 1.5 }}>
-    <Typography variant="body2" color="text.secondary">{label}</Typography>
-    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+  <Box sx={{ mb: 1 }}>
+    <Typography variant="body2" sx={{ fontWeight: 500 }}>
+      {label}:
+    </Typography>
+    <Typography variant="body2" color="text.secondary">
       {value || 'N/A'}
     </Typography>
   </Box>

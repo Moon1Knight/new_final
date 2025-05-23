@@ -5,7 +5,7 @@ const Logo = ({ width = 'auto', height = 40 }) => {
   return (
     <Box
       component="img"
-      src="/logo.png"
+      src="/lovable-uploads/logo.png"
       alt="Admin Portal Logo"
       sx={{
         width: width,

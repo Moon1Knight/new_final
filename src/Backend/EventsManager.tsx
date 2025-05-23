@@ -99,22 +99,44 @@ const EventsManager: FC = () => {
     }
   };
 
-  const handleImageUpload = async (file: File, isMainImage = false): Promise<string | null> => {
+  const handleImageUpload = async (file: File): Promise<string | null> => {
     if (!file) return null;
+    
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select a valid image file');
+      return null;
+    }
+    
+    // Validate file size (10MB limit)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Image size should be less than 10MB');
+      return null;
+    }
+    
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', uploadPreset);
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+      uploadFormData.append('upload_preset', uploadPreset);
       
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
         {
           method: 'POST',
-          body: formData,
+          body: uploadFormData,
         }
       );
       
+      if (!response.ok) {
+        throw new Error(`Upload failed with status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error.message || 'Upload failed');
+      }
+      
       return data.secure_url;
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -169,8 +191,27 @@ const EventsManager: FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     
+    console.log('Form submitted with data:', formData);
+    console.log('Current user:', currentUser);
+    
     if (!currentUser) {
       toast.error('Please log in to add events');
+      return;
+    }
+
+    // Validation
+    if (!formData.title.trim()) {
+      toast.error('Please enter a title');
+      return;
+    }
+    
+    if (!formData.description.trim()) {
+      toast.error('Please enter a description');
+      return;
+    }
+    
+    if (!formData.date) {
+      toast.error('Please select a date');
       return;
     }
 
@@ -181,46 +222,59 @@ const EventsManager: FC = () => {
 
     try {
       setIsLoading(true);
+      console.log('Starting event submission...');
 
       let mainImageUrl: string | null | undefined = editingEvent?.mainImage;
+      
+      // Upload main image if new file is selected
       if (formData.mainImage) {
-        mainImageUrl = await handleImageUpload(formData.mainImage, true);
+        console.log('Uploading main image...');
+        mainImageUrl = await handleImageUpload(formData.mainImage);
         if (!mainImageUrl) {
           toast.error('Failed to upload main image');
           return;
         }
+        console.log('Main image uploaded:', mainImageUrl);
       }
 
-      const additionalImageUrls = formData.additionalImages.length > 0 
-        ? await Promise.all(
-            formData.additionalImages.map(file => handleImageUpload(file))
-          )
-        : editingEvent?.additionalImages || [];
-
-      const validAdditionalImages = additionalImageUrls.filter((url): url is string => url !== null);
+      // Upload additional images if any
+      let additionalImageUrls: string[] = editingEvent?.additionalImages || [];
+      if (formData.additionalImages.length > 0) {
+        console.log('Uploading additional images...');
+        const uploadPromises = formData.additionalImages.map(file => handleImageUpload(file));
+        const uploadResults = await Promise.all(uploadPromises);
+        additionalImageUrls = uploadResults.filter((url): url is string => url !== null);
+        console.log('Additional images uploaded:', additionalImageUrls);
+      }
 
       const eventData = {
-        title: formData.title,
-        description: formData.description,
+        title: formData.title.trim(),
+        description: formData.description.trim(),
         date: formData.date,
         mainImage: mainImageUrl,
-        additionalImages: validAdditionalImages,
-        youtubeLink: formData.youtubeLink,
+        additionalImages: additionalImageUrls,
+        youtubeLink: formData.youtubeLink.trim() || '',
         updatedAt: new Date().toISOString(),
       };
 
+      console.log('Event data to save:', eventData);
+
       if (editingEvent) {
+        console.log('Updating existing event...');
         await updateDoc(doc(db, 'events', editingEvent.id), eventData);
         toast.success('Event updated successfully!');
       } else {
-        await addDoc(collection(db, 'events'), {
+        console.log('Creating new event...');
+        const docRef = await addDoc(collection(db, 'events'), {
           ...eventData,
           createdAt: new Date().toISOString(),
           createdBy: currentUser.uid,
         });
+        console.log('Event created with ID:', docRef.id);
         toast.success('Event added successfully!');
       }
 
+      // Reset form and close dialog
       setFormData({
         title: '',
         description: '',
@@ -230,13 +284,16 @@ const EventsManager: FC = () => {
         youtubeLink: '',
       });
       setOpen(false);
-      fetchEvents();
+      setImagePreview(null);
+      
+      // Refresh events list
+      await fetchEvents();
+      
     } catch (error) {
       console.error('Error saving event:', error);
       toast.error(`Failed to ${editingEvent ? 'update' : 'add'} event. Please try again.`);
     } finally {
       setIsLoading(false);
-      setImagePreview(null);
     }
   };
 
@@ -244,6 +301,7 @@ const EventsManager: FC = () => {
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
+      console.log('Main image selected:', file.name, file.size, file.type);
       setFormData({ ...formData, mainImage: file });
       setImagePreview(URL.createObjectURL(file));
     }
@@ -256,6 +314,7 @@ const EventsManager: FC = () => {
         toast.warning('You can only upload up to 5 additional images');
         return;
       }
+      console.log('Additional images selected:', files.length);
       setFormData({ ...formData, additionalImages: Array.from(files) });
     }
   };
@@ -655,6 +714,7 @@ const EventsManager: FC = () => {
             onSubmit={handleSubmit} 
             sx={{ mt: 2 }}
             className="event-form"
+            id="event-form"
           >
             <TextField
               fullWidth
@@ -795,6 +855,7 @@ const EventsManager: FC = () => {
           </Button>
           <Button 
             type="submit"
+            form="event-form"
             variant="contained" 
             disabled={isLoading}
             sx={{ 

@@ -111,7 +111,7 @@ const HeroSection = () => {
     <div className="absolute top-8 -left-8 w-full h-full rounded-2xl border-4 border-red-300 opacity-20 transform rotate-6 hidden sm:block"></div>
 
     <img
-      src="/lovable-uploads/img4.png"
+      src="/lovable-uploads/img5.png"
       alt="Avenues Students"
       className="relative z-10 w-full rounded-[2.0rem] mt-4 md:mt-0 lg:-mt-40 transition-all"
     />

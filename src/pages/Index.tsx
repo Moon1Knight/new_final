@@ -90,11 +90,12 @@ const Index = () => {
           <Navigation />
           <HeroSection />
           <WhyChooseUs />
-          <Faculty />
-          <Testimonials />
-          <CallToAction />
           <NewsSection />
+          <Faculty />
           
+          <CallToAction />
+          
+          <Testimonials />
           <Footer />
         </motion.div>
       )}
