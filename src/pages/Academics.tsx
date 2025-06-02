@@ -31,8 +31,8 @@ const Academics = () => {
   return (
     <div className="relative overflow-hidden">
       <Helmet>
-        <title>Academics - Avenues Global School</title>
-        <meta name="description" content="Explore our academic programs, curriculum, and educational approach at Avenues Global School." />
+        <title>Academics - Avenues The Global School</title>
+        <meta name="description" content="Explore our academic programs, curriculum, and educational approach at Avenues The Global School." />
       </Helmet>
       
       {/* Background Circles */}
@@ -68,7 +68,7 @@ const Academics = () => {
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          At Avenues Global School, we offer a comprehensive curriculum designed to nurture young minds and prepare them for future success.
+          At Avenues The Global School, we offer a comprehensive curriculum designed to nurture young minds and prepare them for future success.
         </motion.p>
         
         {/* CISCE Preschool Curriculum Section */}

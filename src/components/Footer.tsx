@@ -2,6 +2,7 @@ import React from 'react';
 import SchoolLogo from './SchoolLogo';
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa6';
 
 const FooterSection = ({
   title,
@@ -30,10 +31,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-gray-100 to-white pt-16 relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-gray-50 to-white pt-16 relative overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-school-blue opacity-5 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-school-green opacity-5 rounded-full transform translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-purple-400 opacity-5 rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-400 opacity-5 rounded-full transform translate-x-1/2 translate-y-1/2" />
 
       <div className="container mx-auto max-w-screen-xl px-4 relative z-10">
         {/* Main Footer */}
@@ -41,29 +42,48 @@ const Footer = () => {
           {/* Logo & Socials */}
           <div>
             <Link to="/">
-              <SchoolLogo className="mb-4 transform hover:scale-105 transition-transform" />
+            <img 
+  src='/lovable-uploads/logo2.png' 
+  alt="Avenues Logo"
+  className="h-20 w-auto object-contain md:h-24 lg:h-28"
+/>
             </Link>
-            <p className="text-gray-600 mb-6 text-sm sm:text-base">
+            <p className="text-gray-600 mb-8 text-sm sm:text-base leading-relaxed">
               Avenues is dedicated to providing quality education that nurtures young minds and prepares them for future success through holistic development.
             </p>
-            <div className="flex space-x-3 sm:space-x-4">
-              {[Facebook, Instagram, Twitter].map((Icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-school-blue text-white flex items-center justify-center hover:bg-school-orange transition-colors"
+            <div className="flex space-x-4">
+              <a
+                href="https://www.facebook.com/avenuestheglobalschool/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-110"
+              >
+                <FaFacebook className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/avenuesschool/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-110"
+              >
+                <FaInstagram className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCJLi0Pqd8SxZnr5YXXucKYA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:scale-110"
                 >
-                  <Icon className="h-4 w-4" />
+                <FaYoutube className="h-5 w-5" />
                 </a>
-              ))}
             </div>
           </div>
 
           {/* Quick Links */}
-          <FooterSection title="Quick Links" color="school-orange">
+          <FooterSection title="Quick Links" color="purple-600">
             {[
               { label: 'About Us', href: '/about' },
-              { label: 'Academics', href: '/academics' },
+              // { label: 'Academics', href: '/academics' },
               { label: 'Admissions', href: '/admissions' },
               { label: 'News & Events', href: '/news' },
               { label: 'Contact', href: '/contact' },
@@ -71,9 +91,9 @@ const Footer = () => {
               <li key={i}>
                 <Link
                   to={link.href}
-                  className="text-gray-600 hover:text-school-blue transition-colors flex items-center"
+                  className="text-gray-600 hover:text-purple-600 transition-colors flex items-center group"
                 >
-                  <ArrowRight className="mr-2 h-4 w-4 text-school-orange" />
+                  <ArrowRight className="mr-2 h-4 w-4 text-purple-400 group-hover:text-purple-600 transition-colors" />
                   {link.label}
                 </Link>
               </li>
@@ -81,20 +101,20 @@ const Footer = () => {
           </FooterSection>
 
           {/* Programs */}
-          <FooterSection title="Programs" color="school-green">
+          <FooterSection title="Programs" color="purple-600">
             {[
-              { label: 'Early Years', href: '/academics#early-years' },
-              { label: 'Primary School', href: '/academics#primary' },
-              { label: 'Secondary School', href: '/academics#secondary' },
-              { label: 'Extra-Curricular', href: '/academics#extra' },
-              { label: 'Summer Programs', href: '/academics#summer' },
+              { label: "Pre-Primary Children's House", href: '/academics/pre-primary-childrens-house' },
+              { label: 'Primary School', href: '/academics/Primary-School' },
+              { label: 'Upper Primary', href: '/academics/Upper-Primary' },
+              { label: 'Secondary School', href: '/academics/Secondary-school' },
+            
             ].map((link, i) => (
               <li key={i}>
                 <Link
                   to={link.href}
-                  className="text-gray-600 hover:text-school-green transition-colors flex items-center"
+                  className="text-gray-600 hover:text-purple-600 transition-colors flex items-center group"
                 >
-                  <Check className="mr-2 h-4 w-4 text-school-green" />
+                  <Check className="mr-2 h-4 w-4 text-purple-400 group-hover:text-purple-600 transition-colors" />
                   {link.label}
                 </Link>
               </li>
@@ -102,18 +122,35 @@ const Footer = () => {
           </FooterSection>
 
           {/* Contact Info */}
-          <FooterSection title="Contact Us" color="school-blue">
+          <FooterSection title="Contact Us" color="purple-600">
             <li className="flex items-start text-sm">
-              <MapPin className="h-5 w-5 text-school-blue mr-3 mt-1" />
-              123 Education Street, Knowledge City, 12345
+              <a 
+                href="https://maps.app.goo.gl/if5oYKUVcdwZNKUk8" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-start text-gray-600 hover:text-purple-600 transition-colors group"
+              >
+                <MapPin className="h-5 w-5 text-purple-400 mr-3 mt-1 group-hover:text-purple-600 transition-colors" />
+              Rajahmundry, Andhra Pradesh, IN
+              </a>
             </li>
             <li className="flex items-center text-sm">
-              <Phone className="h-5 w-5 text-school-green mr-3" />
-              +1 (123) 456-7890
+              <a 
+                href="tel:+917997043399"
+                className="flex items-center text-gray-600 hover:text-purple-600 transition-colors group"
+              >
+                <Phone className="h-5 w-5 text-purple-400 mr-3 group-hover:text-purple-600 transition-colors" />
+              +91 7997043399
+              </a>
             </li>
             <li className="flex items-center text-sm">
-              <Mail className="h-5 w-5 text-school-orange mr-3" />
-              info@smartavenues.edu
+              <a 
+                href="mailto:avenuesglobalschool@gmail.com"
+                className="flex items-center text-gray-600 hover:text-purple-600 transition-colors group"
+              >
+                <Mail className="h-5 w-5 text-purple-400 mr-3 group-hover:text-purple-600 transition-colors" />
+              avenuesglobalschool@gmail.com
+              </a>
             </li>
           </FooterSection>
         </div>
@@ -121,12 +158,12 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="border-t border-gray-200 pt-8 pb-12 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {currentYear} Avenues Global School. All rights reserved.
+            &copy; {currentYear} Avenues The Global School. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center md:justify-start space-x-4 text-sm">
-            <a href="#" className="text-gray-500 hover:text-gray-700">Privacy Policy</a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">Terms of Service</a>
-            <a href="#" className="text-gray-500 hover:text-gray-700">Sitemap</a>
+          <div className="flex flex-wrap justify-center md:justify-start space-x-6 text-sm">
+            <a href="#" className="text-gray-500 hover:text-purple-600 transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-500 hover:text-purple-600 transition-colors">Terms of Service</a>
+            <a href="#" className="text-gray-500 hover:text-purple-600 transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

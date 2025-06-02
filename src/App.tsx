@@ -17,6 +17,12 @@ import { useAuth, AuthProvider } from "./contexts/AuthContext";
 import Dashboard from "./Backend/Dashboard";
 import { ToastContainer } from "react-toastify";
 import EventDetail from './pages/EventDetail';
+import ScrollToTop from './components/ScrollToTop';
+import CentreForHumanness from './pages/CentreForHumanness';
+import PrePrimaryChildrensHouse from './pages/PrePrimaryChildrensHouse';
+import PrimarySchool from './pages/PrimarySchool';
+import UpperPrimary from './pages/UpperPrimary';
+import SecondarySchool from './pages/SecondarySchool';
 
 const queryClient = new QueryClient();
 
@@ -31,27 +37,33 @@ const App: React.FC = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/academics" element={<Academics />} />
-            <Route path="/admissions" element={<Admissions />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/news/:id/:slug" element={<EventDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/dashboard/*"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-          </Routes>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <ScrollToTop />
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/academics" element={<Academics />} />
+              <Route path="/academics/pre-primary-childrens-house" element={<PrePrimaryChildrensHouse />} />
+              <Route path="/academics/primary-school" element={<PrimarySchool />} />
+              <Route path="/academics/upper-primary" element={<UpperPrimary />} />
+              <Route path="/academics/secondary-school" element={<SecondarySchool />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:id/:slug" element={<EventDetail />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/centre-for-humanness" element={<CentreForHumanness />} />
+              <Route path="*" element={<NotFound />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/dashboard/*"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
           </AuthProvider>
           <ToastContainer position="top-right" autoClose={3000} />
         </BrowserRouter>

@@ -37,8 +37,8 @@ interface Admission {
   email: string;
   phone: string;
   grade: string;
-  status: 'pending' | 'approved' | 'rejected';
-  timestamp: string; // <-- changed from Timestamp to string (formatted date)
+  status: 'pending' | 'reviewed';  // Changed status options
+  timestamp: string;
   dob?: string;
   gender?: string;
   address?: string;
@@ -106,7 +106,7 @@ const AdmissionsManager: React.FC = () => {
     setSelectedAdmission(null);
   };
 
-  const handleStatusUpdate = async (admissionId: string, newStatus: 'pending' | 'approved' | 'rejected'): Promise<void> => {
+  const handleStatusUpdate = async (admissionId: string, newStatus: 'pending' | 'reviewed'): Promise<void> => {
     try {
       const admissionRef = doc(db, 'admissions', admissionId);
       await updateDoc(admissionRef, { status: newStatus });
@@ -146,11 +146,10 @@ const AdmissionsManager: React.FC = () => {
     setAdmissionToDelete(null);
   };
 
-  const getStatusChipColor = (status: string): 'warning' | 'success' | 'error' | 'default' => {
+  const getStatusChipColor = (status: string): 'warning' | 'success' | 'default' => {
     switch (status) {
       case 'pending': return 'warning';
-      case 'approved': return 'success';
-      case 'rejected': return 'error';
+      case 'reviewed': return 'success';
       default: return 'default';
     }
   };
@@ -175,24 +174,14 @@ const AdmissionsManager: React.FC = () => {
         <Visibility fontSize="small" />
       </IconButton>
       {params.row.status === 'pending' && (
-        <>
-          <IconButton
-            size="small"
-            onClick={() => handleStatusUpdate(params.id as string, 'approved')}
-            color="success"
-            sx={{ '&:hover': { backgroundColor: theme.palette.success.light } }}
-          >
-            <CheckCircle fontSize="small" />
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={() => handleStatusUpdate(params.id as string, 'rejected')}
-            color="error"
-            sx={{ '&:hover': { backgroundColor: theme.palette.error.light } }}
-          >
-            <Cancel fontSize="small" />
-          </IconButton>
-        </>
+        <IconButton
+          size="small"
+          onClick={() => handleStatusUpdate(params.id as string, 'reviewed')}
+          color="success"
+          sx={{ '&:hover': { backgroundColor: theme.palette.success.light } }}
+        >
+          <CheckCircle fontSize="small" />
+        </IconButton>
       )}
       <IconButton
         size="small"
@@ -281,7 +270,6 @@ const AdmissionsManager: React.FC = () => {
                 <DetailItem label="Grade" value={selectedAdmission.grade} />
                 <DetailItem label="Date of Birth" value={selectedAdmission.dob} />
                 <DetailItem label="Gender" value={selectedAdmission.gender} />
-                {/* Just render timestamp string - no toDate() call */}
                 <DetailItem label="Application Date" value={selectedAdmission.timestamp} />
                 <DetailItem label="Status" value={selectedAdmission.status} />
               </Box>
@@ -294,22 +282,13 @@ const AdmissionsManager: React.FC = () => {
         </DialogContent>
         <DialogActions sx={{ px: 3, py: 2 }}>
           {selectedAdmission?.status === 'pending' && (
-            <>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => handleStatusUpdate(selectedAdmission.id, 'approved')}
-              >
-                Approve
-              </Button>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleStatusUpdate(selectedAdmission.id, 'rejected')}
-              >
-                Reject
-              </Button>
-            </>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => handleStatusUpdate(selectedAdmission.id, 'reviewed')}
+            >
+              Mark as Reviewed
+            </Button>
           )}
           <Button onClick={handleClose} color="inherit">
             Close

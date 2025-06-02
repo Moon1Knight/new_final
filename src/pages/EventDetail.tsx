@@ -160,7 +160,7 @@ export const EventDetail: React.FC = () => {
   return (
     <div>
       <Helmet>
-        <title>{event.title} - Avenues Global School</title>
+        <title>{event.title} - Avenues The Global School</title>
         <meta name="description" content={event.description} />
         <meta property="og:title" content={event.title} />
         <meta property="og:description" content={event.description} />
@@ -304,7 +304,7 @@ export const EventDetail: React.FC = () => {
               <div className="bg-gradient-to-r from-school-blue to-school-green rounded-xl p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
                 <p className="text-blue-100 mb-6">
-                  Don't miss out on future events and news from Avenues Global School.
+                  Don't miss out on future events and news from Avenues The Global School.
                 </p>
                 <Button 
                   variant="secondary" 

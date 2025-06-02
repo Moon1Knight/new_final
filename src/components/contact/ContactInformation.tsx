@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Twitter } from 'lucide-react';
+import { FaFacebook,FaInstagram,FaSquareInstagram, FaYoutube } from 'react-icons/fa6';
 
 const ContactInformation = () => {
   return (
@@ -54,14 +55,14 @@ const ContactInformation = () => {
       <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-100">
         <h3 className="font-semibold text-gray-800 text-sm sm:text-base mb-3">Follow Us On</h3>
         <div className="flex space-x-3 sm:space-x-4">
-          <a href="#" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
-            <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+          <a href="https://www.facebook.com/avenuestheglobalschool/" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
+            <FaFacebook className="h-4 w-4 sm:h-5 sm:w-5" />
           </a>
-          <a href="#" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
-            <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+          <a href="https://www.instagram.com/avenuesschool/" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
+            <FaInstagram className="h-4 w-4 sm:h-5 sm:w-5" />
           </a>
-          <a href="#" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
-            <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+          <a href="https://www.youtube.com/channel/UCJLi0Pqd8SxZnr5YXXucKYA" className="bg-school-blue-dark text-white p-1.5 sm:p-2 rounded-full hover:bg-school-orange transition-colors">
+            <FaYoutube className="h-4 w-4 sm:h-5 sm:w-5" />
           </a>
         </div>
       </div>

@@ -52,7 +52,7 @@ const LocationMap = () => {
           className="p-6"
         >
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">Avenues Global School</h3>
+            <h3 className="text-lg font-semibold text-gray-800 mb-2">Avenues The Global School</h3>
             <p className="text-gray-600 mb-4">Our campus is conveniently located and easily accessible by various modes of transportation.</p>
             
             <div className="space-y-4">

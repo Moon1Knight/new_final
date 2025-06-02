@@ -30,6 +30,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import { useAuth } from '../contexts/AuthContext';
 import EventsManager from './EventsManager';
 import AdmissionsManager from './AdmissionsManager';
+import NoticeBoardManager from './NoticeBoardManager';
 import Logo from './Logo';
 
 const drawerWidth = 280;
@@ -65,7 +66,7 @@ const Dashboard = () => {
 
   const menuItems = [
     { text: 'Events', icon: <EventIcon /> },
-    { text: 'Announcements', icon: <AnnouncementIcon /> },
+    { text: 'Notice Board', icon: <AnnouncementIcon /> },
     { text: 'Admins', icon: <GroupIcon /> },
     { text: 'Admissions', icon: <SchoolIcon /> },
   ];
@@ -230,7 +231,7 @@ const Dashboard = () => {
             }}
           >
             {selectedSection === 'Events' && <EventsManager />}
-            {selectedSection === 'Announcements' && <div>Announcements Content</div>}
+            {selectedSection === 'Notice Board' && <NoticeBoardManager />}
             {selectedSection === 'Admins' && <div>Admins Content</div>}
             {selectedSection === 'Admissions' && <AdmissionsManager />}
           </Box>

@@ -15,8 +15,8 @@ const About = () => {
   return (
     <div>
       <Helmet>
-        <title>About Us - Avenues Global School</title>
-        <meta name="description" content="Learn about Avenues Global School - our history, mission, vision, and values." />
+        <title>About Us - Avenues The Global School</title>
+        <meta name="description" content="Learn about Avenues The Global School - our history, mission, vision, and values." />
         <meta name="keywords" content="Avenues, global school, school history, education mission, school values" />
       </Helmet>
       <Navigation />

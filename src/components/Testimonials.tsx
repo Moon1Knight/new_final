@@ -23,7 +23,7 @@ const Testimonials = () => {
       image: "https://randomuser.me/api/portraits/men/32.jpg"
     },
     {
-      quote: "My children have flourished academically and socially since joining Avenues Global School. The school's approach to education is truly holistic.",
+      quote: "My children have flourished academically and socially since joining Avenues The Global School. The school's approach to education is truly holistic.",
       author: "Michelle T.",
       relation: "Parent of Two Students",
       rating: 5,
@@ -47,7 +47,7 @@ const Testimonials = () => {
             What <span className="text-school-blue">Parents</span> Say About Us
           </h2>
           <p className="text-gray-600 text-lg">
-            Hear what our community has to say about their experience at Avenues Global School
+            Hear what our community has to say about their experience at Avenues The Global School
           </p>
         </div>
         

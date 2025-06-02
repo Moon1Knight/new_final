@@ -6,6 +6,7 @@ import ContactInformation from '@/components/contact/ContactInformation';
 import LocationMap from '@/components/contact/LocationMap';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Twitter, Mail, Phone } from 'lucide-react';
+import { YouTube } from '@mui/icons-material';
 
 const Contact = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -37,18 +38,18 @@ const Contact = () => {
   return (
     <div>
       <Helmet>
-        <title>Contact Us - Avenues Global School</title>
-        <meta name="description" content="Get in touch with Avenues Global School. Contact us for admissions, inquiries, or to schedule a visit." />
+        <title>Contact Us - Avenues The Global School</title>
+        <meta name="description" content="Get in touch with Avenues The Global School. Contact us for admissions, inquiries, or to schedule a visit." />
         <meta name="keywords" content="contact school, school admissions, school location, school inquiry, visit campus" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Contact Avenues Global School" />
+        <meta property="og:title" content="Contact Avenues The Global School" />
         <meta property="og:description" content="Reach out to us for admissions and general inquiries." />
         <meta property="og:image" content="https://smartavenues.edu/contact-image.jpg" />
         
         {/* Twitter */}
-        <meta name="twitter:title" content="Contact Avenues Global School" />
+        <meta name="twitter:title" content="Contact Avenues The Global School" />
         <meta name="twitter:description" content="Reach out to us for admissions and general inquiries." />
         
         {/* Schema.org structured data */}
@@ -57,11 +58,11 @@ const Contact = () => {
             {
               "@context": "https://schema.org",
               "@type": "ContactPage",
-              "name": "Contact Avenues Global School",
-              "description": "Get in touch with Avenues Global School for admissions and general inquiries.",
+              "name": "Contact Avenues The Global School",
+              "description": "Get in touch with Avenues The Global School for admissions and general inquiries.",
               "mainEntity": {
                 "@type": "EducationalOrganization",
-                "name": "Avenues Global School",
+                "name": "Avenues The Global School",
                 "telephone": "+91 7997043399",
                 "email": "avenuesglobalschool@gmail.com",
                 "address": {
@@ -79,16 +80,16 @@ const Contact = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative h-64 md:h-80 bg-gradient-to-r from-school-blue to-school-blue-dark overflow-hidden">
+      <section className="relative h-56 md:h-72 bg-gradient-to-r from-purple-800 to-purple-600 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full transform translate-x-1/3 -translate-y-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-white opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-400 opacity-10 rounded-full transform translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-400 opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3"></div>
         </div>
         
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white z-10">
             <motion.h1 
-              className="text-4xl md:text-5xl font-display font-bold mb-4"
+              className="text-5xl md:text-6xl font-display font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -96,9 +97,9 @@ const Contact = () => {
               Contact Us
             </motion.h1>
             <motion.div 
-              className="w-20 h-1 bg-school-orange mx-auto"
+              className="w-24 h-1 bg-purple-300 mx-auto"
               initial={{ width: 0 }}
-              animate={{ width: "5rem" }}
+              animate={{ width: "6rem" }}
               transition={{ duration: 0.8, delay: 0.3 }}
             ></motion.div>
           </div>
@@ -106,26 +107,26 @@ const Contact = () => {
       </section>
       
       {/* Connect with us banner */}
-      <div className="bg-gray-50 border-b border-gray-100">
-        <div className="container mx-auto py-4 sm:py-6 px-4">
-          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4">
-            <p className="text-gray-600 text-sm sm:text-base text-center sm:text-left">Get in touch with us through any of these channels:</p>
-            <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
-              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors text-sm sm:text-base">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-2" /> avenuesglobalschool@gmail.com
+      <div className="bg-gradient-to-r from-purple-900 to-purple-800 border-b border-purple-700">
+        <div className="container mx-auto py-6 sm:py-8 px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-6">
+            <p className="text-purple-100 text-sm sm:text-base text-center sm:text-left font-medium">Get in touch with us through any of these channels:</p>
+            <div className="flex flex-wrap justify-center sm:justify-end gap-6 sm:gap-8">
+              <a href="mailto:avenuesglobalschool@gmail.com" className="flex items-center text-purple-100 hover:text-white transition-colors text-sm sm:text-base group">
+                <Mail className="h-5 w-5 mr-2 group-hover:text-purple-200 transition-colors" /> avenuesglobalschool@gmail.com
               </a>
-              <a href="#" className="flex items-center text-school-blue hover:text-school-blue-dark transition-colors text-sm sm:text-base">
-                <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-2" /> +91 7997043399
+              <a href="tel:+917997043399" className="flex items-center text-purple-100 hover:text-white transition-colors text-sm sm:text-base group">
+                <Phone className="h-5 w-5 mr-2 group-hover:text-purple-200 transition-colors" /> +91 7997043399
               </a>
-              <div className="flex items-center space-x-4">
-                <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
+              <div className="flex items-center space-x-6">
+                <a href="https://www.facebook.com/avenuestheglobalschool/" className="text-purple-100 hover:text-white transition-colors transform hover:scale-110">
+                  <Facebook className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+                <a href="https://www.instagram.com/avenuesschool/" className="text-purple-100 hover:text-white transition-colors transform hover:scale-110">
+                  <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-school-blue hover:text-school-orange transition-colors">
-                  <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
+                <a href="https://www.youtube.com/channel/UCJLi0Pqd8SxZnr5YXXucKYA" className="text-purple-100 hover:text-white transition-colors transform hover:scale-110">
+                  <YouTube className="h-5 w-5" />
                 </a>
               </div>
             </div>
