@@ -21,6 +21,124 @@ const About = () => {
       </Helmet>
       <Navigation />
       
+      {/* Our Story Section */}
+      <motion.section
+        className="py-16 bg-gradient-to-br from-purple-50 to-pink-50"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, delay: 0.1 }}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-display font-bold text-center mb-12 text-purple-800">
+            Our Story
+          </h2>
+
+          {/* Message from Dr. Srinivas Cherukuri */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              <div className="md:col-span-1 overflow-hidden">
+                <img
+                  src="Faculty/Dr.Srinivas_Cherukuri.jpeg"
+                  alt="Dr.Srinivas_Cherukuri"
+                  className="w-full h-64 md:h-full object-cover object-top"
+                />
+              </div>
+              <div className="md:col-span-2 p-6 md:p-8">
+                <h3 className="text-2xl font-display font-bold text-purple-700 mb-4">
+                  A Message from the Director
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  At Avenues The Global School, we believe that education is not just about imparting knowledge—it is about nurturing values, shaping character, and inspiring excellence in every child.
+                  As the Director of this school, I take immense pride in the vision we uphold: to create a dynamic and inclusive environment where young minds are empowered to think critically, act responsibly, and lead confidently. Each Avenian is encouraged to embrace learning with curiosity, compassion, and courage.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  Our dedicated team of educators, well-crafted curriculum, and value-driven culture work in harmony to ensure that every child grows not only academically but also socially, emotionally, and ethically. We strive to equip our students with global perspectives while staying rooted in our cultural ethos.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  We are not just a school; we are a community where every child matters, every voice is heard, and every success is celebrated. Together with the support of our parents and well-wishers, we continue our journey of transforming education—one child at a time.
+                </p>
+                <p className="text-gray-700 mb-6">
+                  Thank you for trusting Avenues The Global School. The future belongs to our children, and we are committed to shaping it with purpose, integrity, and vision.
+                </p>
+                <p className="font-semibold text-purple-700">
+                  Warm regards,<br />
+                  Dr. Srinivas Cherukuri<br />
+                  Director
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Message from Mrs. Latha Devaguptapu */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              <div className="md:col-span-2 p-6 md:p-8 order-2 md:order-1">
+                <h3 className="text-2xl font-display font-bold text-green-700 mb-4">
+                  A Message from the Academic Director
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Greetings from Avenues The Global School.
+                  As the Academic Director, it brings me great joy to witness the vibrant learning environment we have cultivated—a place where each child’s potential is recognised, respected, and nurtured with care.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  At Avenues, we are committed to academic excellence with a heart. Our teaching practices are not limited to textbooks; they are designed to inspire creativity, encourage inquiry, and build resilience in every learner. We focus on developing 21st-century skills while instilling timeless values that prepare our students to thrive in a rapidly changing world.
+                </p>
+                <p className="text-gray-700 mb-6">
+                  Learning at Avenues is joyful, meaningful, and transformative. We constantly strive to ensure that our students not only excel in examinations but also emerge as confident, empathetic, and socially responsible individuals. Our teachers play a vital role in this journey, acting as mentors who guide, support, and inspire with dedication and passion.
+                </p>
+                <p className="font-semibold text-green-700">
+                  Warm regards,<br />
+                  Mrs. Latha Devaguptapu<br />
+                  Academic Director
+                </p>
+              </div>
+              <div className="md:col-span-1 overflow-hidden order-1 md:order-2">
+                <img
+                  src="Faculty/Mrs.Latha_Devaguptapu.jpeg"
+                  alt="Mrs. Latha Devaguptapu"
+                  className="w-full h-64 md:h-full object-cover object-top"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Message from Bala Chandra M */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              <div className="md:col-span-1 overflow-hidden">
+                <img
+                  src="/Faculty/bala-chandra-m.jpg"
+                  alt="Bala Chandra M"
+                  className="w-full h-64 md:h-full object-cover object-top"
+                />
+              </div>
+              <div className="md:col-span-2 p-6 md:p-8">
+                <h3 className="text-2xl font-display font-bold text-orange-700 mb-4">
+                  A Message from the Director
+                </h3>
+                <p className="text-gray-700 mb-4">
+                  Dear Parents, Well-wishers, and Members of the Community,
+                  At Avenues The Global School, our mission is clear—to build a foundation of learning that lasts a lifetime. As one of the Directors, I feel deeply honoured to be a part of this inspiring journey of shaping young minds and fostering a culture of excellence, integrity, and innovation.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  We envision a school where every child is seen, heard, and valued. We aim to create not just scholars, but individuals of strong character—independent in thought, collaborative in action, and compassionate in spirit.
+                </p>
+                <p className="text-gray-700 mb-6">
+                  Our approach blends tradition with modern educational practices. We uphold academic rigour, promote creativity, and encourage social responsibility. Every initiative, every lesson, and every interaction is designed to support the holistic growth of our students.
+                </p>
+                <p className="font-semibold text-orange-700">
+                  With best wishes,<br />
+                  Bala Chandra M<br />
+                  Director
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </motion.section>
+
+      {/* The rest of the content follows */}
       <div className="bg-gradient-to-b from-blue-50 to-white">
         <div className="container mx-auto px-4 pt-16 pb-24">
           <h1 className={`text-5xl font-display font-bold text-center mb-4 text-school-blue-dark transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>

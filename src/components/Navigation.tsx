@@ -51,7 +51,7 @@ const Navigation = () => {
       label: 'Academics', 
       href: '/academics/pre-primary-childrens-house/',
       children: [
-        { label: "Pre-Primary Children's House", href: '/academics/pre-primary-childrens-house/' },
+        { label: "Pre-Primary", href: '/academics/pre-primary-childrens-house/' },
         { label: 'Primary School', href: '/academics/Primary-School' },
         { label: 'Upper Primary', href: '/academics/Upper-Primary' },
         { label: 'Secondary school', href: '/academics/Secondary-school' }
