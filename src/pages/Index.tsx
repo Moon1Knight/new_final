@@ -15,6 +15,8 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 
+
+
 const Index = () => {
   const [loading, setLoading] = useState(true);
   const [showBanner, setShowBanner] = useState(true);
@@ -180,6 +182,7 @@ const Index = () => {
           transition={{ duration: 0.5 }}
         >
           <Navigation />
+          <NoticeBoard />
           <HeroSection />
           <WhyChooseUs />
           <NewsSection />

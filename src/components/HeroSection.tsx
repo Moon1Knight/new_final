@@ -35,9 +35,9 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center overflow-hidden bg-gradient-to-r from-[#fff9f3] via-[#e0f4ff] to-[#f7e8ff] -mt-10">
       {/* Remove any responsive hidden classes here */}
-      <div className="w-full mt-4 sm:mt-8 relative z-20 block">
+      {/* <div className="w-full mt-4 sm:mt-8 relative z-20 block">
         <NoticeBoard />
-      </div>
+      </div> */}
       {/* Abstract Design Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-300 opacity-10 rounded-full transform translate-x-1/3 -translate-y-1/2 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-green-300 opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3 blur-3xl"></div>
