@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { collection, onSnapshot, orderBy, query, limit, where } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { toast } from 'react-toastify';
+import NewsAlerts from '@/components/NewsAlerts';
 
 interface Event {
   id: string;
@@ -392,6 +393,7 @@ const News = () => {
             </div>
           )}
         </div>
+        <NewsAlerts/>
       </div>
       
       {/* Footer loads immediately */}

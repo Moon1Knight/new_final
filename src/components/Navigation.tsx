@@ -111,7 +111,7 @@ const Navigation = () => {
           </div>
         </div>
       </div>
- <div className="container mx-auto px-4 py-4">
+ <div className="container mx-auto px-3 py-3">
         <div className="flex justify-between items-center">
           <Link to="/">
             <motion.div
@@ -122,10 +122,10 @@ const Navigation = () => {
               <img 
                 src='/lovable-uploads/logo.png' 
                 alt="Avenues Logo"
-                className="h-12 w-auto object-contain md:h-14 lg:h-16"
+                className="h-14 w-auto object-contain md:h-16 lg:h-20"
               />
             </motion.div>
-          </Link>
+          </Link> 
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">

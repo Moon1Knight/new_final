@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 
 const Academics = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,10 +31,12 @@ const Academics = () => {
 
   return (
     <div className="relative overflow-hidden">
-      <Helmet>
-        <title>Academics - Avenues The Global School</title>
-        <meta name="description" content="Explore our academic programs, curriculum, and educational approach at Avenues The Global School." />
-      </Helmet>
+      <SEO
+        title="Academics"
+        description="Explore our academic programs, curriculum, and educational approach at Avenues The Global School."
+        keywords="academics, curriculum, education, CISCE, preschool, primary school"
+        canonicalUrl="/academics"
+      />
       
       {/* Background Circles */}
       {circles.map((circle) => (

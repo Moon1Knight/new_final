@@ -41,7 +41,7 @@ const HeroSection = () => {
       <div className="absolute bottom-32 right-1/4 w-8 h-8 rounded-full bg-sky-300 opacity-30 animate-pulse delay-700"></div>
 
       {/* Main Content Container */}
-      <div className="container mx-auto px-4 pt-16 sm:pt-12 md:pt-16 pb-8 md:pb-0">
+      <div className="container mx-auto px-4 pt-20 sm:pt-16 md:pt-20 pb-12 md:pb-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           {/* Text Section */}
           <motion.div
@@ -62,7 +62,7 @@ const HeroSection = () => {
               variants={itemVariants}
             >
               <span className="text-sky-700 block">Nurturing Young Minds,</span>
-              <span className="text-red-600 mt-1 sm:mt-2 block">Building Future Leaders.</span>
+              <span className="text-red-600 text-base sm:text-4xl md:text-5xl mt-1 sm:mt-2 block">Building Future Leaders.</span>
             </motion.h1>
 
             <motion.p

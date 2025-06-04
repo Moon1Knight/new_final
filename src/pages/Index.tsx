@@ -183,6 +183,7 @@ const Index = () => {
           <HeroSection />
           <WhyChooseUs />
           <NewsSection />
+          <Faculty />
           <CallToAction />
           <Testimonials />
           <Footer />
