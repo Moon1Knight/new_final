@@ -21,12 +21,15 @@ const NoticeBoard = () => {
   ];
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm py-1 sm:py-1.5 overflow-hidden shadow-md">
+    <div className="bg-white/80 backdrop-blur-sm py-1 sm:py-1.5 overflow-hidden shadow-md z-40 relative">
       <div className="max-w-[95rem] mx-auto">
-        <div className="overflow-hidden">
-          <div className="whitespace-nowrap" style={{
-            animation: 'marquee 25s linear infinite',
-          }}>
+        <div className="overflow-hidden w-full">
+          <div
+            className="whitespace-nowrap notice-marquee"
+            style={{
+              animation: 'marquee 25s linear infinite',
+            }}
+          >
             {notices.map((notice, index) => (
               <span
                 key={index}
@@ -35,7 +38,6 @@ const NoticeBoard = () => {
                 {notice.text}
               </span>
             ))}
-            {/* Duplicate notices for seamless scrolling */}
             {notices.map((notice, index) => (
               <span
                 key={`dup-${index}`}
@@ -52,18 +54,18 @@ const NoticeBoard = () => {
         {`
           @keyframes marquee {
             0% {
-              transform: translateX(0);
+              transform: translateX(100%);
             }
             100% {
-              transform: translateX(-50%);
+              transform: translateX(-100%);
             }
           }
-          .whitespace-nowrap:hover {
+          .notice-marquee:hover {
             animation-play-state: paused;
           }
           @media (max-width: 640px) {
-            .whitespace-nowrap {
-              animation-duration: 15s;
+            .notice-marquee {
+              animation-duration: 15s !important;
             }
           }
         `}
@@ -72,4 +74,4 @@ const NoticeBoard = () => {
   );
 };
 
-export default NoticeBoard; 
+export default NoticeBoard;

@@ -18,14 +18,17 @@ import {
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Visibility as ViewIcon } from '@mui/icons-material';
 import { storage, db } from '../firebase/config';
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+// Remove Firebase Storage imports
+// import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { cloudName, uploadPreset } from '../config/cloudinary';
 
 interface Notice {
   id: string;
   title: string;
-  fileUrl: string;
-  fileName: string;
-  fileType: string;
+  description?: string;
+  fileUrl?: string;
+  fileName?: string;
+  fileType?: string;
   createdAt: Date;
 }
 
@@ -33,6 +36,7 @@ const NoticeBoardManager = () => {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [editingNotice, setEditingNotice] = useState<Notice | null>(null);
@@ -60,9 +64,11 @@ const NoticeBoardManager = () => {
     if (notice) {
       setEditingNotice(notice);
       setTitle(notice.title);
+      setDescription(notice.description || '');
     } else {
       setEditingNotice(null);
       setTitle('');
+      setDescription('');
       setFile(null);
     }
     setOpen(true);
@@ -72,6 +78,7 @@ const NoticeBoardManager = () => {
     setOpen(false);
     setEditingNotice(null);
     setTitle('');
+    setDescription('');
     setFile(null);
   };
 
@@ -82,7 +89,7 @@ const NoticeBoardManager = () => {
   };
 
   const handleSubmit = async () => {
-    if (!title || (!file && !editingNotice)) return;
+    if (!title) return; // Only title is required
 
     setLoading(true);
     try {
@@ -91,15 +98,34 @@ const NoticeBoardManager = () => {
       let fileType = editingNotice?.fileType || '';
 
       if (file) {
-        const storageRef = ref(storage, `notices/${Date.now()}_${file.name}`);
-        await uploadBytes(storageRef, file);
-        fileUrl = await getDownloadURL(storageRef);
-        fileName = file.name;
-        fileType = file.type;
+        // Upload to Cloudinary using fetch API
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`,
+          {
+            method: 'POST',
+            body: formData,
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error?.message || `Upload failed with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        fileUrl = data.secure_url;
+        fileName = data.original_filename + '.' + data.format;
+        fileType = data.resource_type + '/' + data.format;
       }
 
-      const noticeData = {
+      const noticeData: Omit<Notice, 'id'> = {
         title,
+        description: description || '',
         fileUrl,
         fileName,
         fileType,
@@ -116,6 +142,7 @@ const NoticeBoardManager = () => {
       fetchNotices();
     } catch (error) {
       console.error('Error saving notice:', error);
+      // Optionally show a user-friendly error message here
     } finally {
       setLoading(false);
     }
@@ -124,10 +151,8 @@ const NoticeBoardManager = () => {
   const handleDelete = async (notice: Notice) => {
     if (window.confirm('Are you sure you want to delete this notice?')) {
       try {
-        if (notice.fileUrl) {
-          const fileRef = ref(storage, notice.fileUrl);
-          await deleteObject(fileRef);
-        }
+        // Optionally, you can delete the file from Cloudinary using their API if you store the public_id
+        // For now, just delete the Firestore document
         await deleteDoc(doc(db, 'notices', notice.id));
         fetchNotices();
       } catch (error) {
@@ -164,17 +189,26 @@ const NoticeBoardManager = () => {
                 <Typography variant="h6" gutterBottom>
                   {notice.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  {notice.fileName}
-                </Typography>
+                {notice.description && (
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    {notice.description}
+                  </Typography>
+                )}
+                {notice.fileName && (
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
+                    {notice.fileName}
+                  </Typography>
+                )}
                 <Typography variant="caption" color="text.secondary">
                   {notice.createdAt.toLocaleDateString()}
                 </Typography>
               </CardContent>
               <Box sx={{ p: 2, pt: 0, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-                <IconButton onClick={() => handleViewFile(notice)} color="primary">
-                  <ViewIcon />
-                </IconButton>
+                {notice.fileUrl && (
+                  <IconButton onClick={() => handleViewFile(notice)} color="primary">
+                    <ViewIcon />
+                  </IconButton>
+                )}
                 <IconButton onClick={() => handleOpen(notice)} color="primary">
                   <EditIcon />
                 </IconButton>
@@ -195,8 +229,19 @@ const NoticeBoardManager = () => {
             margin="dense"
             label="Title"
             fullWidth
+            required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            fullWidth
+            multiline
+            minRows={2}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             sx={{ mb: 2 }}
           />
           <input
@@ -213,7 +258,7 @@ const NoticeBoardManager = () => {
               startIcon={<AddIcon />}
               fullWidth
             >
-              {file ? file.name : 'Upload File (Image/PDF)'}
+              {file ? file.name : (editingNotice?.fileName ? editingNotice.fileName : 'Upload File (Image/PDF)')}
             </Button>
           </label>
         </DialogContent>
@@ -222,7 +267,7 @@ const NoticeBoardManager = () => {
           <Button
             onClick={handleSubmit}
             variant="contained"
-            disabled={loading || !title || (!file && !editingNotice)}
+            disabled={loading || !title}
             sx={{ bgcolor: '#1a73e8', '&:hover': { bgcolor: '#1557b0' } }}
           >
             {loading ? <CircularProgress size={24} /> : 'Save'}
@@ -258,4 +303,4 @@ const NoticeBoardManager = () => {
   );
 };
 
-export default NoticeBoardManager; 
+export default NoticeBoardManager;

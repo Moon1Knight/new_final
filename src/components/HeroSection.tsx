@@ -34,6 +34,10 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-[90vh] flex flex-col items-center overflow-hidden bg-gradient-to-r from-[#fff9f3] via-[#e0f4ff] to-[#f7e8ff] -mt-10">
+      {/* Remove any responsive hidden classes here */}
+      <div className="w-full mt-4 sm:mt-8 relative z-20 block">
+        <NoticeBoard />
+      </div>
       {/* Abstract Design Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-300 opacity-10 rounded-full transform translate-x-1/3 -translate-y-1/2 blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-green-300 opacity-10 rounded-full transform -translate-x-1/3 translate-y-1/3 blur-3xl"></div>
@@ -41,7 +45,7 @@ const HeroSection = () => {
       <div className="absolute bottom-32 right-1/4 w-8 h-8 rounded-full bg-sky-300 opacity-30 animate-pulse delay-700"></div>
 
       {/* Main Content Container */}
-      <div className="container mx-auto px-4 pt-20 sm:pt-16 md:pt-20 pb-12 md:pb-6">
+      <div className="container mx-auto px-4 pt-20 sm:pt-16 md:pt-20 pb-12 md:pb-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           {/* Text Section */}
           <motion.div
@@ -134,9 +138,7 @@ const HeroSection = () => {
       </div>
 
       {/* Notice Board at bottom */}
-      <div className="w-full mt-4 sm:mt-8 relative z-20">
-        <NoticeBoard />
-      </div>
+      
 
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-10"></div>
     </section>
