@@ -12,18 +12,15 @@ import {
   Typography,
   IconButton,
   Grid,
-  Paper,
   CircularProgress,
 } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon, Visibility as ViewIcon } from '@mui/icons-material';
-import { storage, db } from '../firebase/config';
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-// Remove Firebase Storage imports
-// import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { db } from '../firebase/config';
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { cloudName, uploadPreset } from '../config/cloudinary';
 
 interface Notice {
-  id: string;
+  id: string; 
   title: string;
   description?: string;
   fileUrl?: string;
@@ -49,11 +46,14 @@ const NoticeBoardManager = () => {
   const fetchNotices = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, 'notices'));
-      const noticesData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt?.toDate(),
-      })) as Notice[];
+      const noticesData = querySnapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+          createdAt: data.createdAt?.toDate?.() || new Date(0),
+        };
+      }) as Notice[];
       setNotices(noticesData.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
     } catch (error) {
       console.error('Error fetching notices:', error);
@@ -89,7 +89,7 @@ const NoticeBoardManager = () => {
   };
 
   const handleSubmit = async () => {
-    if (!title) return; // Only title is required
+    if (!title) return;
 
     setLoading(true);
     try {
@@ -98,7 +98,6 @@ const NoticeBoardManager = () => {
       let fileType = editingNotice?.fileType || '';
 
       if (file) {
-        // Upload to Cloudinary using fetch API
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', uploadPreset);
@@ -129,7 +128,7 @@ const NoticeBoardManager = () => {
         fileUrl,
         fileName,
         fileType,
-        createdAt: editingNotice?.createdAt || new Date(),
+        createdAt: editingNotice?.createdAt || serverTimestamp(),
       };
 
       if (editingNotice) {
@@ -142,7 +141,6 @@ const NoticeBoardManager = () => {
       fetchNotices();
     } catch (error) {
       console.error('Error saving notice:', error);
-      // Optionally show a user-friendly error message here
     } finally {
       setLoading(false);
     }
@@ -151,8 +149,6 @@ const NoticeBoardManager = () => {
   const handleDelete = async (notice: Notice) => {
     if (window.confirm('Are you sure you want to delete this notice?')) {
       try {
-        // Optionally, you can delete the file from Cloudinary using their API if you store the public_id
-        // For now, just delete the Firestore document
         await deleteDoc(doc(db, 'notices', notice.id));
         fetchNotices();
       } catch (error) {
@@ -200,7 +196,7 @@ const NoticeBoardManager = () => {
                   </Typography>
                 )}
                 <Typography variant="caption" color="text.secondary">
-                  {notice.createdAt.toLocaleDateString()}
+                  {notice.createdAt.toLocaleString()}
                 </Typography>
               </CardContent>
               <Box sx={{ p: 2, pt: 0, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>

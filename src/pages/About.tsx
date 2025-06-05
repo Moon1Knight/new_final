@@ -1,9 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+
 
 const About = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,7 +28,7 @@ const About = () => {
         animate={isLoaded ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.7, delay: 0.1 }}
       >
-        <div className="container mx-auto px-4">
+        <div id='story' className="container mx-auto px-4">
           <motion.h2
             className="text-4xl font-display font-bold text-center mb-12 text-purple-800"
             initial={{ opacity: 0, y: 30 }}
@@ -152,7 +152,7 @@ const About = () => {
               </div>
               <div className="md:col-span-1 overflow-hidden">
                 <img
-                  src="/Faculty/bala-chandra-m.jpg"
+                  src="/Faculty/bala-chandra-m.jpeg"
                   alt="Bala Chandra M"
                   className="w-full h-64 md:h-full object-cover object-top"
                 />
@@ -303,7 +303,7 @@ const About = () => {
           </motion.div>
 
           {/* Our Mission Section */}
-          <div className={`transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* <div className={`transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="bg-white p-10 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <h2 className="text-3xl font-display font-bold text-center text-school-green mb-8">Our Mission</h2>
               
@@ -359,7 +359,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* Photo Gallery Section */}
           <motion.div
             className="mt-16"

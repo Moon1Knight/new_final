@@ -6,6 +6,7 @@ import { FaGlobe, FaPhone, FaMap } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
+import NoticeBoard from './NoticeBoard';
 
 
 
@@ -43,8 +44,8 @@ const Navigation = () => {
       href: '/about',
       children: [
         { label: 'Our Story', href: '/about#story' },
-        { label: 'Our Mission', href: '/about#mission' },
-        { label: 'Our Team', href: '/about#team' }
+        { label: 'Our Mission', href: '/our-mission' },
+        { label: 'Our Faculty', href: '/about#team' }
       ]
     },
     { 
@@ -174,6 +175,7 @@ const Navigation = () => {
               </Button>
             </div>
           </nav>
+          
           
           {/* Mobile menu button */}
           <button 

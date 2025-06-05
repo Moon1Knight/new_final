@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'; // Add this import
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight, Play } from 'lucide-react';
+import { Calendar, User, ArrowRight, Play, Bell, AlertTriangle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { collection, onSnapshot, orderBy, query, limit, where } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { toast } from 'react-toastify';
-import NewsAlerts from '@/components/NewsAlerts';
+import NoticeBoard from './Notices';
+
 
 interface Event {
   id: string;
@@ -297,6 +298,7 @@ const News = () => {
 
     return (
       <div className="flex items-center justify-center space-x-2 mt-8">
+
         <button
           onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
           disabled={currentPage === 1}
@@ -393,9 +395,37 @@ const News = () => {
             </div>
           )}
         </div>
-        <NewsAlerts/>
       </div>
+
+      {/* NoticeBoard & Alerts Section */}
+      <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-4">
+              <Bell className="h-8 w-8 text-amber-600 mr-3" />
+              <h2 className="text-4xl text-school-blue-dark font-display font-bold text-gray-800">
+                NoticeBoard & Alerts
+              </h2>
+              <AlertTriangle className="h-8 w-8 text-red-500 ml-3" />
+            </div>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Important announcements, notices, and alerts for students, parents, and staff.
+            </p>
+          </div>
+          
+          {/* Placeholder content for the NoticeBoard & Alerts section */}
+          <div id='NoticeBoard&Alerts' className="bg-white rounded-lg shadow-lg border-2 border-amber-200 p-8">
+            <div className="text-center text-gray-500">
+              <div className="mb-4">
+              </div>
+              <NoticeBoard />
+            </div>
+          </div>
+        </div>
+      </div>
+     
       
+
       {/* Footer loads immediately */}
       <Footer />
       

@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Faculty = () => {
   const navigate = useNavigate();
+  // const handleRedirect = () => {
+  //   navigate("/news#");
+  // };
   
   const teachers = [
     {
@@ -19,7 +22,7 @@ const Faculty = () => {
       position: "Director",
       color: "bg-orange-500",
       gradient: "from-orange-400 to-orange-600",
-      imageUrl: "/Faculty/bala-chandra-m.jpg",
+      imageUrl: "/Faculty/bala-chandra-m.jpeg",
       messageId: "bala-message"
     },
     {
@@ -32,7 +35,7 @@ const Faculty = () => {
     }
   ];
 
-  const handleCardClick = (messageId: string) => {
+  const handleRedirect = (messageId: string) => {
     navigate(`/about#${messageId}`);
   };
 
@@ -40,7 +43,7 @@ const Faculty = () => {
     <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-3">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Our <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Faculty</span> 
+          Our <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">Management</span> 
         </h2>
         
         <div className="flex justify-center">
@@ -49,7 +52,7 @@ const Faculty = () => {
               <Card 
                 key={index} 
                 className="group relative overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 rounded-2xl cursor-pointer"
-                onClick={() => handleCardClick(teacher.messageId)}
+                onClick={() => handleRedirect(teacher.messageId)}
               >
                 {/* Animated gradient border */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${teacher.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}></div>

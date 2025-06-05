@@ -25,6 +25,7 @@ const PrePrimaryChildrensHouse = lazy(() => import('./pages/PrePrimaryChildrensH
 const PrimarySchool = lazy(() => import('./pages/PrimarySchool'));
 const UpperPrimary = lazy(() => import('./pages/UpperPrimary'));
 const SecondarySchool = lazy(() => import('./pages/SecondarySchool'));
+const OurMission = lazy(() => import('./pages/OurMission'));
 
 // Define interface for PrivateRoute props
 interface PrivateRouteProps {
@@ -58,6 +59,7 @@ const App: React.FC = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
+               <Route path="/our-mission" element={<OurMission />} />
                 <Route path="/academics" element={<Academics />} />
                 <Route path="/academics/pre-primary-childrens-house" element={<PrePrimaryChildrensHouse />} />
                 <Route path="/academics/primary-school" element={<PrimarySchool />} />
