@@ -1,30 +1,40 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from 'react-router-dom';
 
 const Faculty = () => {
+  const navigate = useNavigate();
+  
   const teachers = [
     {
       name: "Dr. Srinivas Cherukuri",
       position: "Director",
       color: "bg-red-500",
       gradient: "from-red-400 to-red-600",
-      imageUrl: "Faculty/Dr.Srinivas_Cherukuri.jpeg" // Added image URL
+      imageUrl: "Faculty/Dr.Srinivas_Cherukuri.jpeg",
+      messageId: "srinivas-message"
     },
     {
       name: "Bala Chandra M",
       position: "Director",
       color: "bg-orange-500",
       gradient: "from-orange-400 to-orange-600",
-      imageUrl: "/Faculty/bala-chandra-m.jpg" // Added image URL
+      imageUrl: "/Faculty/bala-chandra-m.jpg",
+      messageId: "bala-message"
     },
     {
       name: "Mrs. Latha Devaguptapu",
       position: "Academic Director",
       color: "bg-green-500",
       gradient: "from-green-400 to-green-600",
-      imageUrl: "Faculty/Mrs.Latha_Devaguptapu.jpeg" // Added image URL
+      imageUrl: "Faculty/Mrs.Latha_Devaguptapu.jpeg",
+      messageId: "latha-message"
     }
   ];
+
+  const handleCardClick = (messageId: string) => {
+    navigate(`/about#${messageId}`);
+  };
 
   return (
     <section className="py-12 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -36,7 +46,11 @@ const Faculty = () => {
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-8xl">
             {teachers.map((teacher, index) => (
-              <Card key={index} className="group relative overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 rounded-2xl">
+              <Card 
+                key={index} 
+                className="group relative overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 rounded-2xl cursor-pointer"
+                onClick={() => handleCardClick(teacher.messageId)}
+              >
                 {/* Animated gradient border */}
                 <div className={`absolute inset-0 bg-gradient-to-r ${teacher.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}></div>
                 <div className="relative bg-white m-1 rounded-xl overflow-hidden">
