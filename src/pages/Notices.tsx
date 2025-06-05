@@ -6,8 +6,9 @@ interface Notice {
   id: string;
   title: string;
   description: string;
-  imageUrl?: string;
-  pdfUrl?: string;
+  fileUrl?: string;  // Cloudinary URL
+  fileName?: string;
+  fileType?: string;
   createdAt: Date;
 }
 
@@ -26,8 +27,9 @@ const NoticeSection = () => {
             id: doc.id,
             title: data.title,
             description: data.description || '',
-            imageUrl: data.imageUrl || '',
-            pdfUrl: data.pdfUrl || '',
+            fileUrl: data.fileUrl || '',
+            fileName: data.fileName || '',
+            fileType: data.fileType || '',
             createdAt: data.createdAt?.toDate?.() || new Date(),
           };
         });
@@ -96,9 +98,9 @@ const NoticeSection = () => {
                       {notice.description}
                     </p>
                   )}
-                  {/* Attachments indicator */}
+                  {/* Update the attachments indicator section */}
                   <div className="flex items-center mt-2 space-x-2">
-                    {notice.imageUrl && (
+                    {notice.fileUrl && notice.fileType?.startsWith('image/') && (
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">
                         <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -106,7 +108,7 @@ const NoticeSection = () => {
                         Image
                       </span>
                     )}
-                    {notice.pdfUrl && (
+                    {notice.fileUrl && notice.fileType?.includes('pdf') && (
                       <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-red-100 text-red-700">
                         <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -157,9 +159,9 @@ const NoticeSection = () => {
       {/* Enhanced Modal */}
       {selectedNotice && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4 text-white">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4 text-white sticky top-0 z-10">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold truncate pr-4">
                   {selectedNotice.title}
@@ -183,56 +185,61 @@ const NoticeSection = () => {
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-              {/* Description */}
-              {selectedNotice.description && (
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
-                    Description
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {selectedNotice.description}
-                  </p>
+            <div className="overflow-y-auto" style={{ maxHeight: 'calc(90vh - 88px)' }}>
+              {/* Content Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+                {/* Left Column: Description */}
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+                      Description
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                      {selectedNotice.description}
+                    </p>
+                  </div>
                 </div>
-              )}
 
-              {/* Attachments */}
-              {(selectedNotice.imageUrl || selectedNotice.pdfUrl) && (
-                <div className="space-y-4">
-                  <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                    Attachments
-                  </h4>
-                  
-                  {/* Image Preview */}
-                  {selectedNotice.imageUrl && (
-                    <div className="bg-gray-50 rounded-xl p-4">
-                      <img
-                        src={selectedNotice.imageUrl}
-                        alt="Notice attachment"
-                        className="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                      />
+                {/* Right Column: Attachments */}
+                <div>
+                  {selectedNotice.fileUrl && (
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+                        Attachment
+                      </h4>
+                      {selectedNotice.fileType?.startsWith('image/') ? (
+                        <div className="rounded-xl overflow-hidden shadow-lg">
+                          <img
+                            src={selectedNotice.fileUrl}
+                            alt={selectedNotice.fileName || "Notice attachment"}
+                            className="w-full h-auto"
+                          />
+                        </div>
+                      ) : selectedNotice.fileType?.includes('pdf') && (
+                        <div className="bg-gray-50 rounded-xl p-4">
+                          <a
+                            href={selectedNotice.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center p-4 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl transition-colors group"
+                          >
+                            <svg className="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                            <div>
+                              <p className="font-medium text-lg">View PDF Document</p>
+                              <p className="text-sm text-red-600">{selectedNotice.fileName || 'Download PDF'}</p>
+                            </div>
+                            <svg className="w-6 h-6 ml-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        </div>
+                      )}
                     </div>
                   )}
-
-                  {/* PDF Link */}
-                  {selectedNotice.pdfUrl && (
-                    <a
-                      href={selectedNotice.pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl transition-colors group"
-                    >
-                      <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                      </svg>
-                      <span className="font-medium">View PDF Document</span>
-                      <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
