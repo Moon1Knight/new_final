@@ -57,13 +57,16 @@ const NoticeSection = () => {
         {/* Table Header */}
         <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
           <div className="grid grid-cols-12 gap-4 px-6 py-4">
-            <div className="col-span-7 sm:col-span-8 text-sm font-semibold text-gray-700 uppercase tracking-wider">
+            <div className="col-span-5 sm:col-span-6 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
               Notice Title
             </div>
-            <div className="col-span-2 sm:col-span-2 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
+            <div className="col-span-3 sm:col-span-2 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
+              Media
+            </div>
+            <div className="col-span-2 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
               Date
             </div>
-            <div className="col-span-3 sm:col-span-2 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
+            <div className="col-span-2 text-sm font-semibold text-gray-700 uppercase tracking-wider text-center">
               Action
             </div>
           </div>
@@ -89,7 +92,7 @@ const NoticeSection = () => {
                 onClick={() => setSelectedNotice(notice)}
               >
                 {/* Title Column */}
-                <div className="col-span-7 sm:col-span-8">
+                <div className="col-span-5 sm:col-span-6 flex flex-col items-center text-center">
                   <h3 className="text-gray-900 font-medium text-sm sm:text-base line-clamp-2 group-hover:text-blue-700 transition-colors">
                     {notice.title}
                   </h3>
@@ -98,29 +101,30 @@ const NoticeSection = () => {
                       {notice.description}
                     </p>
                   )}
-                  {/* Update the attachments indicator section */}
-                  <div className="flex items-center mt-2 space-x-2">
-                    {notice.fileUrl && notice.fileType?.startsWith('image/') && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">
-                        <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        Image
-                      </span>
-                    )}
-                    {notice.fileUrl && notice.fileType?.includes('pdf') && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-red-100 text-red-700">
-                        <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                        </svg>
-                        PDF
-                      </span>
-                    )}
-                  </div>
+                </div>
+
+                {/* Media Column */}
+                <div className="col-span-3 sm:col-span-2 flex items-center justify-center space-x-2">
+                  {notice.fileUrl && notice.fileType?.startsWith('image/') && (
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">
+                      <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      Image
+                    </span>
+                  )}
+                  {notice.fileUrl && notice.fileType?.includes('pdf') && (
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-red-100 text-red-700">
+                      <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                      PDF
+                    </span>
+                  )}
                 </div>
 
                 {/* Date Column */}
-                <div className="col-span-2 sm:col-span-2 flex items-center justify-center">
+                <div className="col-span-2 flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-sm font-medium text-gray-900">
                       {formatDate(notice.createdAt)}
@@ -135,7 +139,7 @@ const NoticeSection = () => {
                 </div>
 
                 {/* Action Column */}
-                <div className="col-span-3 sm:col-span-2 flex items-center justify-center">
+                <div className="col-span-2 flex items-center justify-center">
                   <button 
                     className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 transition-all duration-200 group-hover:shadow-md"
                     onClick={(e) => {
