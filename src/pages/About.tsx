@@ -10,6 +10,19 @@ const About = () => {
 
   useEffect(() => {
     setIsLoaded(true);
+    const hash = window.location.hash;
+  if (hash) {
+    // Small delay to ensure DOM is ready and animations complete
+    setTimeout(() => {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 500); // Longer delay to account for your animations
+  }
   }, []);
 
   return (
@@ -161,7 +174,7 @@ const About = () => {
           </div>
 
           {/* Message from Mrs. Latha Devaguptapu */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
+          <div id='latha-message' className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div className="md:col-span-1 overflow-hidden">
                 <img

@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Faculty = () => {
   const navigate = useNavigate();
-  // const handleRedirect = () => {
-  //   navigate("/news#");
-  // };
+
   
   const teachers = [
     {
@@ -103,16 +101,7 @@ const Faculty = () => {
             ))}
           </div>
         </div>
-        
-        {/* Additional decorative elements */}
-        {/* <div className="flex justify-center mt-12">
-          <div className="flex space-x-2">
-            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
-          </div>
-        </div> */}
+      
       </div>
     </section>
   );
