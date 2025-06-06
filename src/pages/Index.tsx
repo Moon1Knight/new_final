@@ -117,63 +117,59 @@ const Index = () => {
 
       {/* Full-screen Video Banner Overlay */}
       {!loading && showBanner && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black bg-opacity-90 flex items-center justify-center p-4"
-          onClick={() => setShowBanner(false)}
-        >
+  <div
+    className="fixed inset-0 z-[9999] bg-black bg-opacity-90 flex items-center justify-center p-4"
+    onClick={() => setShowBanner(false)}
+  >
+    <div
+      className="relative w-full max-w-4xl mx-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-200 z-10 bg-black bg-opacity-50 rounded-full p-2"
+        onClick={() => setShowBanner(false)}
+        aria-label="Close Video"
+      >
+        <X className="w-6 h-6" />
+      </button>
+
+      <div className="relative w-full rounded-lg overflow-hidden shadow-2xl aspect-video">
+        {!showVideo ? (
           <div
-            className="relative w-full max-w-4xl mx-auto"
-            onClick={(e) => e.stopPropagation()}
+            className="relative w-full h-full cursor-pointer"
+            onClick={handleThumbnailClick}
           >
-            <button
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-200 z-10 bg-black bg-opacity-50 rounded-full p-2"
-              onClick={() => setShowBanner(false)}
-              aria-label="Close Video"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
-              {!showVideo ? (
-                // Custom Thumbnail
-                <div 
-                  className="relative w-full aspect-video cursor-pointer"
-                  onClick={handleThumbnailClick}
+            <img
+              src="banner/banner1.jpeg" // your thumbnail image
+              alt="School Video Thumbnail"
+              className="w-full h-full object-cover rounded-lg"
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-40 transition-all duration-300">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
+                <svg
+                  className="w-8 h-8 md:w-10 md:h-10 text-purple-600"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
-                  <img
-                    src="/banner/banner1.jpeg"
-                    alt="School Banner"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 hover:bg-opacity-40 transition-all duration-300">
-                    <div className="w-16 h-16 md:w-20 md:h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform duration-300">
-                      <svg
-                        className="w-8 h-8 md:w-10 md:h-10 text-purple-600"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                // Video Player
-                <iframe
-                  src="https://player.cloudinary.com/embed/?cloud_name=dw6owilcs&public_id=WhatsApp_Video_2025-05-30_at_11.46.11_2f322c18_cuhezi&profile=cld-default&autoplay=true"
-                  width="640"
-                  height="360"
-                  style={{ height: 'auto', width: '100%', aspectRatio: '640 / 360' }}
-                  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                  frameBorder="0"
-                  className="rounded-lg"
-                />
-              )}
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <iframe
+            src="https://player.cloudinary.com/embed/?cloud_name=dw6owilcs&public_id=english_cdihev&autoplay=true"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowFullScreen
+            frameBorder="0"
+            className="w-full h-full rounded-lg"
+          />
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
 
       {!loading && (
         <motion.div
