@@ -19,17 +19,17 @@ const PrePrimaryChildrensHouse = () => {
           Pre-Primary Children's House
         </motion.h1>
 
-        {/* Hero Image */}
+        {/* Hero Image - Made smaller */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-16 relative w-full rounded-2xl overflow-hidden shadow-lg"
+          className="mb-16 relative w-full max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-lg"
         >
           <img
             src="/banner/Preschool-main.jpg"
             alt="Pre-Primary Children's House"
-            className="w-full h-auto object-contain"
+            className="w-full h-64 md:h-80 object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </motion.div>
@@ -44,7 +44,7 @@ const PrePrimaryChildrensHouse = () => {
           <h2 className="text-purple-600 text-2xl font-semibold mb-6">
             CISCE Preschool Curriculum
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
+          <p className="text-gray-700 leading-relaxed mb-6 text-justify">
             Early Childhood Education (ECE) marks the initial step on the educational ladder, serving as a pivotal stage that lays the groundwork for lifelong learning and holistic development. The preschool curriculum encompasses activities, games, and experiences meticulously planned and developed by teachers to enhance the competence of young children. Upon entering preschool, children bring with them a diverse range of knowledge, abilities, values, experiences, and attitudes shaped within the contexts of their families and social environments. A high-quality CISCE ECE curriculum offers opportunities for young learners to explore these constructs in a developmentally appropriate manner.
           </p>
         </motion.div>
@@ -75,7 +75,7 @@ const PrePrimaryChildrensHouse = () => {
             ].map((principle, index) => (
               <li key={index} className="flex items-start space-x-2">
                 <span className="text-purple-500 mt-1">•</span>
-                <span className="text-gray-700">{principle}</span>
+                <span className="text-gray-700 text-justify">{principle}</span>
               </li>
             ))}
           </ul>
@@ -104,7 +104,7 @@ const PrePrimaryChildrensHouse = () => {
                 ].map((area, index) => (
                   <li key={index} className="flex items-start space-x-2">
                     <span className="text-purple-500 mt-1">•</span>
-                    <span className="text-gray-700">{area}</span>
+                    <span className="text-gray-700 text-justify">{area}</span>
                   </li>
                 ))}
               </ul>
@@ -120,7 +120,7 @@ const PrePrimaryChildrensHouse = () => {
                 ].map((item, index) => (
                   <li key={index} className="flex items-start space-x-2">
                     <span className="text-purple-500 mt-1">•</span>
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-gray-700 text-justify">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -138,10 +138,10 @@ const PrePrimaryChildrensHouse = () => {
           <h2 className="text-purple-600 text-2xl font-semibold mb-6">
             Pedagogy – How learning happens at Avenues?
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
+          <p className="text-gray-700 leading-relaxed mb-6 text-justify">
             Young children come to preschool with boundless curiosity and a voracious capacity to learn. They possess immense interest in their immediate surroundings and learn about their world through observation, exploration, discovery, experimentation, and investigation into how things work and why certain events occur in specific ways. Each child is unique and has different strengths, interests, and needs.
           </p>
-          <p className="text-gray-700 leading-relaxed mb-8">
+          <p className="text-gray-700 leading-relaxed mb-8 text-justify">
             Children will be provided with plenty of opportunities to play, both freely and with guidance. They will be exposed to concrete objects, hands-on experiences, sensory stimulation, and developmentally appropriate activities.
           </p>
 
@@ -162,7 +162,7 @@ const PrePrimaryChildrensHouse = () => {
             ].map((process, index) => (
               <li key={index} className="flex items-start space-x-2">
                 <span className="text-purple-500 mt-1">•</span>
-                <span className="text-gray-700">{process}</span>
+                <span className="text-gray-700 text-justify">{process}</span>
               </li>
             ))}
           </ul>
@@ -174,4 +174,4 @@ const PrePrimaryChildrensHouse = () => {
   );
 };
 
-export default PrePrimaryChildrensHouse; 
+export default PrePrimaryChildrensHouse;
