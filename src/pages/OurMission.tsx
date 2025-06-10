@@ -48,7 +48,7 @@ const OurMission = () => {
                 animate={isLoaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h1 className="text-5xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-6">
+                <h1 className="text-3xl md:text-4xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-6">
                   Our Foundation
                 </h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">

@@ -50,13 +50,13 @@ const Staff = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-25 to-gray-100">
       <Navigation />
-      <div className="container mx-auto px-4 py-12 max-w-[85rem]">
+      <div className="container mx-auto px-3 py-12 max-w-[85rem]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 bg-gradient-to-r from-purple-600 via-purple-700 to-purple-800 bg-clip-text text-transparent drop-shadow-lg">
             Our Faculty
           </h1>
           <div className="w-32 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto mb-6 rounded-full"></div>

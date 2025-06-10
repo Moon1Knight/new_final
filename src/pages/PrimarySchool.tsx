@@ -14,7 +14,7 @@ const PrimarySchool = () => {
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 text-center bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent drop-shadow-sm"
+          className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent drop-shadow-sm"
         >
           Primary School
         </motion.h1>
