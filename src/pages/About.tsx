@@ -116,7 +116,7 @@ const About = () => {
             </div>
           </div>
           {/* Message from Bala Chandra M */}
-          <div id="bala-message" className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
+          {/* <div id="bala-message" className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div className="md:col-span-2 p-6 md:p-8">
                 <motion.h3
@@ -171,7 +171,7 @@ const About = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Message from Mrs. Latha Devaguptapu */}
           <div id='latha-message' className="bg-white rounded-xl shadow-lg overflow-hidden mb-12 md:mb-16">

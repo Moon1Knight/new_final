@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,10 +8,28 @@ import { HelmetProvider } from "react-helmet-async";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
 import { ToastContainer } from "react-toastify";
 import ScrollToTop from './components/ScrollToTop';
+import OptimizedImage from '@/components/OptimizedImage';
 
-// Lazy load all page components
-const Index = lazy(() => import('./pages/Index'));
-const About = lazy(() => import('./pages/About'));
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(registration => {
+      console.log('SW registered:', registration);
+    }).catch(error => {
+      console.log('SW registration failed:', error);
+    });
+  });
+}
+
+// Preload critical components
+const preloadComponent = (importFn: () => Promise<any>) => {
+  const Component = lazy(importFn);
+  return Component;
+};
+
+// Lazy load all page components with preloading
+const Index = preloadComponent(() => import('./pages/Index'));
+const About = preloadComponent(() => import('./pages/About'));
 const Academics = lazy(() => import('./pages/Academics'));
 const Admissions = lazy(() => import('./pages/Admissions'));
 const News = lazy(() => import('./pages/News'));
@@ -26,16 +44,19 @@ const PrimarySchool = lazy(() => import('./pages/PrimarySchool'));
 const UpperPrimary = lazy(() => import('./pages/UpperPrimary'));
 const SecondarySchool = lazy(() => import('./pages/SecondarySchool'));
 const OurMission = lazy(() => import('./pages/OurMission'));
-
+const NoticeBoard = lazy(() => import('./pages/Notices'));
 // Define interface for PrivateRoute props
 interface PrivateRouteProps {
   children: React.ReactNode;
 }
 
-// Loading fallback component
+// Loading fallback component with better UX
 const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+  <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex flex-col items-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <p className="mt-4 text-gray-600">Loading...</p>
+    </div>
   </div>
 );
 
@@ -68,6 +89,7 @@ const App: React.FC = () => (
                 <Route path="/admissions" element={<Admissions />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/news/:id/:slug" element={<EventDetail />} />
+                <Route path="/notice-board" element={<NoticeBoard />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/centre-for-humanness" element={<CentreForHumanness />} />
                 <Route path="*" element={<NotFound />} />

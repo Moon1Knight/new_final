@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import SchoolLogo from './SchoolLogo';
 import { Menu, X, Mail, ChevronDown } from 'lucide-react';
-import { FaGlobe, FaPhone, FaMap } from "react-icons/fa6";
+import { FaGlobe, FaPhone, FaMap, FaBell } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { IoMail } from "react-icons/io5";
@@ -101,6 +101,13 @@ const Navigation = () => {
             </div>
           </div>
           <div className="flex items-center space-2 flex-shrink-0">
+            <a 
+              href="/notice-board" 
+              className="flex items-center text-white hover:text-yellow-300 transition-colors text-sm mr-4"
+            >
+              <FaBell className="h-4 w-4 mr-2" />
+              <span className="hidden md:inline ml-1">Alerts</span>
+            </a>
             <a 
               href="http://avenues.nexterp.in" 
               target='__blank' 
