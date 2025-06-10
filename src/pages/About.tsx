@@ -315,66 +315,9 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Our Mission Section */}
-          {/* <div className={`transition-all duration-700 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="bg-white p-10 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-              <h2 className="text-3xl font-display font-bold text-center text-school-green mb-8">Our Mission</h2>
-              
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-school-green mb-2">Mission</h3>
-                  <p className="text-gray-700">
-                    At Avenues, our mission is to provide a nurturing and stimulating environment where
-                    children can develop intellectually, emotionally, and socially. We believe in fostering
-                    creativity, critical thinking, and a lifelong love of learning.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-school-orange mb-2">Vision</h3>
-                  <p className="text-gray-700">
-                    To be recognized as a center of educational excellence, inspiring and empowering our students
-                    to become global citizens who contribute positively to society through their knowledge,
-                    skills, and compassion.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-school-blue mb-2">Values</h3>
-                  <ul className="text-gray-700 space-y-2">
-                    <li className="flex items-start">
-                      <span className="text-school-green font-bold mr-2">•</span>
-                      <span>Excellence in all endeavors</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-school-green font-bold mr-2">•</span>
-                      <span>Respect for diversity and inclusivity</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-school-green font-bold mr-2">•</span>
-                      <span>Integrity and ethical conduct</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-school-green font-bold mr-2">•</span>
-                      <span>Innovation and adaptability</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-school-green font-bold mr-2">•</span>
-                      <span>Social responsibility</span>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-school-red mb-2">History</h3>
-                  <p className="text-gray-700">
-                    Founded in 2005, Avenues began with a vision to transform education. From its humble
-                    beginnings with just 50 students, we have grown into a prestigious institution recognized
-                    for academic excellence and holistic development.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          {/* Photo Gallery Section */}
-          <motion.div
+          
+          
+          {/* <motion.div
             className="mt-16"
             initial={{ opacity: 0 }}
             animate={isLoaded ? { opacity: 1 } : {}}
@@ -406,7 +349,7 @@ const About = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Approaches to Learning Section */}
           <motion.div
