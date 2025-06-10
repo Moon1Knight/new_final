@@ -63,14 +63,14 @@ const Contact = () => {
               "mainEntity": {
                 "@type": "EducationalOrganization",
                 "name": "Avenues The Global School",
-                "telephone": "+91 7997043399",
+                "telephone": "+91 7997043355 ,+91 7997043366",
                 "email": "avenuesglobalschool@gmail.com",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "123 Education Street",
-                  "addressLocality": "Knowledge City",
-                  "postalCode": "12345",
-                  "addressCountry": "US"
+                  "streetAddress": "Tammana Complex, Seelam Nookaraju Jn, near KIMS Bollineni Hospital",
+                  "addressLocality": "Rajahmundry",
+                  "postalCode": "533101",
+                  "addressCountry": "India"
                 }
               }
             }
@@ -115,8 +115,8 @@ const Contact = () => {
               <a href="mailto:avenuesglobalschool@gmail.com" className="flex items-center text-purple-100 hover:text-white transition-colors text-sm sm:text-base group">
                 <Mail className="h-5 w-5 mr-2 group-hover:text-purple-200 transition-colors" /> avenuesglobalschool@gmail.com
               </a>
-              <a href="tel:+917997043399" className="flex items-center text-purple-100 hover:text-white transition-colors text-sm sm:text-base group">
-                <Phone className="h-5 w-5 mr-2 group-hover:text-purple-200 transition-colors" /> +91 7997043399
+              <a href="tel:+917997043355 , +91 7997043366" className="flex items-center text-purple-100 hover:text-white transition-colors text-sm sm:text-base group">
+                <Phone className="h-5 w-5 mr-2 group-hover:text-purple-200 transition-colors" /> +91 7997043355 , +91 7997043366
               </a>
               <div className="flex items-center space-x-6">
                 <a href="https://www.facebook.com/avenuestheglobalschool/" className="text-purple-100 hover:text-white transition-colors transform hover:scale-110">
@@ -133,7 +133,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      
+
       <motion.div 
         className="py-8 sm:py-12 md:py-16"
         initial="hidden"

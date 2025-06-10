@@ -45,7 +45,7 @@ const Navigation = () => {
       children: [
         { label: 'Our Story', href: '/about#story' },
         { label: 'Our Mission', href: '/our-mission' },
-        { label: 'Our Faculty', href: '/about#team' }
+        { label: 'Our Faculty', href: '/Staff' }
       ]
     },
     { 

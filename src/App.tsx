@@ -45,6 +45,7 @@ const UpperPrimary = lazy(() => import('./pages/UpperPrimary'));
 const SecondarySchool = lazy(() => import('./pages/SecondarySchool'));
 const OurMission = lazy(() => import('./pages/OurMission'));
 const NoticeBoard = lazy(() => import('./pages/Notices'));
+const Staff = lazy(() => import('./pages/Staff'));
 // Define interface for PrivateRoute props
 interface PrivateRouteProps {
   children: React.ReactNode;
@@ -91,6 +92,7 @@ const App: React.FC = () => (
                 <Route path="/news/:id/:slug" element={<EventDetail />} />
                 <Route path="/notice-board" element={<NoticeBoard />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/staff" element={<Staff />} />
                 <Route path="/centre-for-humanness" element={<CentreForHumanness />} />
                 <Route path="*" element={<NotFound />} />
                 <Route path="/login" element={<Login />} />

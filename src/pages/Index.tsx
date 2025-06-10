@@ -8,6 +8,7 @@ import CallToAction from '@/components/CallToAction';
 import NewsSection from '@/components/NewsSection';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+import Staff from './Staff';
 import LoadingAnimation from '@/components/LoadingAnimation';
 import SocialMediaIcons from '@/components/SocialMediaIcons';
 import NoticeBoard from '@/components/NoticeBoard';
@@ -84,29 +85,24 @@ const Index = () => {
         <meta name="twitter:image" content="https://smartavenues.edu/twitter-image.jpg" />
         <script type="application/ld+json">
           {`
+            
             {
               "@context": "https://schema.org",
-              "@type": "EducationalOrganization",
-              "name": "Avenues The Global School",
-              "url": "https://smartavenues.edu",
-              "logo": "https://smartavenues.edu/logo.png",
-              "sameAs": [
-                "https://www.facebook.com/smartavenues",
-                "https://www.instagram.com/smartavenues",
-                "https://twitter.com/smartavenues"
-              ],
-              "description": "Avenues provides quality education that nurtures young minds to reach their full potential in a supportive and innovative environment.",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "123 Education Street",
-                "addressLocality": "Knowledge City",
-                "postalCode": "12345",
-                "addressCountry": "US"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+1-123-456-7890",
-                "contactType": "admissions"
+              "@type": "ContactPage",
+              "name": "Contact Avenues The Global School",
+              "description": "Get in touch with Avenues The Global School for admissions and general inquiries.",
+              "mainEntity": {
+                "@type": "EducationalOrganization",
+                "name": "Avenues The Global School",
+                "telephone": "+91 7997043355 ,+91 7997043366",
+                "email": "avenuesglobalschool@gmail.com",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Tammana Complex, Seelam Nookaraju Jn, near KIMS Bollineni Hospital",
+                  "addressLocality": "Rajahmundry",
+                  "postalCode": "533101",
+                  "addressCountry": "India"
+                }
               }
             }
           `}
