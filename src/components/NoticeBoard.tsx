@@ -62,7 +62,7 @@ const NoticeBoard = () => {
   }, []);
 
   const handleNoticeClick = () => {
-    navigate('/news?section=NoticeBoard&Alerts');
+    navigate('/notice-board');
   };
 
   return (
@@ -70,34 +70,29 @@ const NoticeBoard = () => {
       className="bg-white/80 backdrop-blur-sm py-1 sm:py-1.5 shadow-md sticky z-[45]" 
       style={{ top: `${navbarHeight}px` }}
     >
-      <div className="max-w-[95rem] mx-auto">
-        <div className="overflow-hidden w-full">
-          <div className="flex whitespace-nowrap animate-marquee notice-marquee">
-            {[...notices, ...notices].map((notice, index) => (
-              <span
-                key={index}
-                className={`inline-block px-2 sm:px-4 py-1 text-white cursor-pointer hover:animate-none transition-transform duration-200 relative ${
-                  bgColors[index % bgColors.length]
-                } border-r border-white/20 text-[11px] sm:text-sm`}
-                onClick={handleNoticeClick}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {notice.title}
-                
-                {/* Tooltip - positioned below the notice */}
-                {hoveredIndex === index && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap z-50 animate-fade-in">
-                    Click to Read More
-                    {/* Tooltip arrow pointing up */}
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-800"></div>
-                  </div>
-                )}
-              </span>
-            ))}
-          </div>
+      <div className="flex whitespace-nowrap animate-marquee notice-marquee">
+  {notices.slice(0, 8).map((notice, index) => (
+    <span
+      key={index}
+      className={`inline-block px-2 sm:px-4 py-1 text-white cursor-pointer hover:animate-none transition-transform duration-200 relative ${
+        bgColors[index % bgColors.length]
+      } border-r border-white/20 text-[11px] sm:text-sm`}
+      onClick={handleNoticeClick}
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      {notice.title}
+
+      {hoveredIndex === index && (
+        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap z-50 animate-fade-in">
+          Click to Read More
+          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-800"></div>
         </div>
-      </div>
+      )}
+    </span>
+  ))}
+</div>
+
 
       <style>{`
         @keyframes marquee {
