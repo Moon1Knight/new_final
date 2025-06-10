@@ -63,7 +63,7 @@ const NoticeSection = () => {
   return (
     <>
     <Navigation />
-    <section className="mt-2 xs:mt-3 sm:mt-6 md:mt-8 lg:mt-10 px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8">
+    <section className="mt-2 xs:mt-3 sm:mt-6 md:mt-8 lg:mt-10 px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 pb-8 md:pb-12 lg:pb-16">
       {/* Title Section */}
       <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 py-16 mb-8">
         <div className="container mx-auto px-4">
@@ -83,7 +83,7 @@ const NoticeSection = () => {
       </div>
 
       {/* Notice List Container */}
-      <div className="bg-white rounded-lg xs:rounded-xl shadow-md xs:shadow-lg border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-lg xs:rounded-xl shadow-md xs:shadow-lg border border-gray-100 overflow-hidden mb-8 md:mb-12">
         {/* Table Header - Hidden on mobile and tablet */}
         <div className="hidden lg:block bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
           <div className="grid grid-cols-12 gap-4 px-4 xl:px-6 py-3 xl:py-4">
@@ -102,8 +102,12 @@ const NoticeSection = () => {
           </div>
         </div>
 
-        {/* Table Body */}
-        <div className="max-h-[calc(100vh-140px)] xs:max-h-[calc(100vh-160px)] sm:max-h-[calc(100vh-180px)] md:max-h-[calc(100vh-200px)] lg:max-h-[400px] xl:max-h-[500px] overflow-y-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400">
+        {/* Table Body with controlled height for scrollbar after 8 notices */}
+        <div className="overflow-y-auto scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400"
+             style={{ 
+               maxHeight: notices.length > 8 ? '480px' : 'auto',
+               minHeight: notices.length === 0 ? '200px' : 'auto'
+             }}>
           {notices.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-6 xs:py-8 sm:py-10 md:py-12 text-gray-500">
               <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gray-100 rounded-full flex items-center justify-center mb-2 xs:mb-3 sm:mb-4">
@@ -258,7 +262,7 @@ const NoticeSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Modal */}
+      {/* Enhanced Modal with Text Slider */}
       {selectedNotice && (
         <div className="fixed inset-0 bg-black/50 xs:bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-1 xs:p-2 sm:p-3 md:p-4">
           <div className="bg-white rounded-lg xs:rounded-xl sm:rounded-2xl shadow-xl xs:shadow-2xl w-full max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl max-h-[98vh] xs:max-h-[95vh] sm:max-h-[92vh] md:max-h-[90vh] overflow-hidden">
@@ -290,15 +294,19 @@ const NoticeSection = () => {
             <div className="overflow-y-auto" style={{ maxHeight: 'calc(98vh - 70px)' }}>
               {/* Content Grid */}
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 xs:gap-3 sm:gap-4 md:gap-6 p-2 xs:p-3 sm:p-4 md:p-6">
-                {/* Description Section */}
+                {/* Description Section with Scrollbar */}
                 <div className="space-y-2 xs:space-y-3 sm:space-y-4 md:space-y-6 order-1">
                   <div>
                     <h4 className="text-xs xs:text-sm font-semibold text-gray-700 uppercase tracking-wider mb-1 xs:mb-2 sm:mb-3">
                       Description
                     </h4>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-xs xs:text-sm sm:text-base md:text-base">
-                      {selectedNotice.description}
-                    </p>
+                    
+                    {/* Scrollable Text Container */}
+                    <div className="bg-gray-50 rounded-lg xs:rounded-xl p-3 xs:p-4 sm:p-6 max-h-48 xs:max-h-64 sm:max-h-80 md:max-h-96 overflow-y-auto scrollbar-thin scrollbar-track-gray-200 scrollbar-thumb-gray-400 hover:scrollbar-thumb-gray-500">
+                      <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-xs xs:text-sm sm:text-base md:text-base">
+                        {selectedNotice.description || 'No description available'}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
