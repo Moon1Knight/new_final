@@ -70,7 +70,7 @@ const Staff = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
         >
           {facultyMembers.map((faculty, index) => (
             <motion.div
@@ -84,40 +84,31 @@ const Staff = () => {
                 ${index % 9 === 0 ? 'xl:transform xl:-rotate-1' : ''}
               `}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-600 rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-20"></div>
-              <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl border-2 border-purple-100 group-hover:shadow-2xl transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg transform rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-20"></div>
+              <div className="relative bg-white rounded-lg overflow-hidden shadow-md border border-purple-100 group-hover:shadow-xl transition-all duration-300">
                 <div className="relative overflow-hidden">
-                  <div className="aspect-square bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                  <div className="w-[35mm] h-[45mm] mx-auto bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
                     {faculty.imageUrl ? (
-                      <img src={faculty.imageUrl} alt={faculty.name} className="w-full h-full object-cover" />
+                      <img 
+                        src={faculty.imageUrl} 
+                        alt={faculty.name} 
+                        className="w-full h-full object-cover object-top"
+                      />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-purple-300 to-purple-500 flex items-center justify-center">
-                        <div className="text-white text-6xl font-bold">
+                        <div className="text-white text-4xl font-bold">
                           {faculty.name.split(' ').map(n => n[0]).join('')}
                         </div>
                       </div>
                     )}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute top-4 right-4 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center transform rotate-45 group-hover:rotate-90 transition-transform duration-300">
-                    <div className="w-3 h-3 bg-white rounded-full transform -rotate-45"></div>
-                  </div>
                 </div>
-                <div className="p-6 relative">
-                  <div className="w-12 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mb-4 rounded-full group-hover:w-full transition-all duration-500"></div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-700 transition-colors duration-300">
+                <div className="p-3 text-center">
+                  <h3 className="text-sm font-semibold text-gray-800 group-hover:text-purple-700 transition-colors duration-300 line-clamp-2">
                     {faculty.name}
                   </h3>
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full mr-2 group-hover:animate-pulse"></div>
-                    <p className="text-gray-600 font-medium">
-                      {/* You can add designation here if available */}
-                    </p>
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-300 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                 </div>
               </div>
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-bounce"></div>
             </motion.div>
           ))}
         </motion.div>
