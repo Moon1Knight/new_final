@@ -23,7 +23,7 @@ const Staff = () => {
     { name: "G. Pushpa Kumari", imageUrl: "/Faculty/Staff/G.PUSHPA-KUMARI-M.B.A-B.ED.jpeg", designation: "English – Teacher" },
     { name: "K. Jhansi", imageUrl: "/Faculty/Staff/K.JHANSI-B.A.jpeg", designation: "Asst. Teacher" },
     { name: "B. Kumari", imageUrl: "/Faculty/Staff/B.KUMARI-M.A-B.ED.jpg", designation: "Art/Craft Teacher" },
-    { name: "G. Harika", imageUrl: "/Faculty/Staff/G.HARIKA-B.TECH-D.ED.jpg", designation: "Art/Craft Teacher" }
+    { name: "G. Harika", imageUrl: "/Faculty/Staff/G.HARIKA-B.TECH-D.ED.jpg", designation: "Mathematics – Teacher" }
   ];
 
   const officeStaff = [
