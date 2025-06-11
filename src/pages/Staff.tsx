@@ -26,7 +26,7 @@ const Staff = () => {
   ];
 
   const officeStaff = [
-    { name: "K. Durga Bhavani", imageUrl: "/Faculty/Staff/B.KUMARI-M.A-B.ED.jpg", designation: "Accounts" },
+    { name: "K. Durga Bhavani", imageUrl: "", designation: "Accounts" },
     { name: "M.S.S. Durga Devi", imageUrl: "", designation: "Computer Operator" },
     { name: "R. Srinivas", imageUrl: "", designation: "Manager" }
   ];
@@ -55,12 +55,12 @@ const Staff = () => {
   };
 
   const renderCards = (list: typeof facultyMembers) => (
-    <motion.div
-    variants={containerVariants}
-    initial="hidden"
-    animate="visible"
-    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
-  >
+   <motion.div
+  variants={containerVariants}
+  initial="hidden"
+  animate="visible"
+  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+>
       {list.map((member, index) => (
         <motion.div
           key={index}
