@@ -22,13 +22,14 @@ const Staff = () => {
     { name: "A. Alekhya", imageUrl: "/Faculty/Staff/A.ALEKHYA-B.PHARMACY.jpeg", designation: "Biology – Teacher" },
     { name: "G. Pushpa Kumari", imageUrl: "/Faculty/Staff/G.PUSHPA-KUMARI-M.B.A-B.ED.jpeg", designation: "English – Teacher" },
     { name: "K. Jhansi", imageUrl: "/Faculty/Staff/K.JHANSI-B.A.jpeg", designation: "Asst. Teacher" },
-    { name: "B. Kumari", imageUrl: "/Faculty/Staff/B.KUMARI-M.A-B.ED.jpg", designation: "Art/Craft Teacher" }
+    { name: "B. Kumari", imageUrl: "/Faculty/Staff/B.KUMARI-M.A-B.ED.jpg", designation: "Art/Craft Teacher" },
+    { name: "G. Harika", imageUrl: "/Faculty/Staff/G.HARIKA-B.TECH-D.ED.jpg", designation: "Art/Craft Teacher" }
   ];
 
   const officeStaff = [
-    { name: "K. Durga Bhavani", imageUrl: "", designation: "Accounts" },
-    { name: "M.S.S. Durga Devi", imageUrl: "", designation: "Computer Operator" },
-    { name: "R. Srinivas", imageUrl: "", designation: "Manager" }
+    { name: "K. Durga Bhavani", imageUrl: "/Faculty/Staff/BHAVANI.jpg", designation: "Accounts" },
+    { name: "M.S.S. Durga Devi", imageUrl: "/Faculty/Staff/M.DEVI.jpg", designation: "Computer Operator" },
+    { name: "R. Srinivas", imageUrl: "/Faculty/Staff/R.Srinivas.jpeg", designation: "Manager" }
   ];
 
   const containerVariants = {
@@ -55,12 +56,12 @@ const Staff = () => {
   };
 
   const renderCards = (list: typeof facultyMembers) => (
-   <motion.div
-  variants={containerVariants}
-  initial="hidden"
-  animate="visible"
-  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
->
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+    >
       {list.map((member, index) => (
         <motion.div
           key={index}
@@ -68,8 +69,13 @@ const Staff = () => {
           whileHover={{ scale: 1.05, rotateY: 5, transition: { duration: 0.3 } }}
           className="relative group cursor-pointer"
         >
+          {/* Purple glow background */}
           <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg transform rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-20"></div>
+  
+          {/* Card */}
           <div className="relative bg-white rounded-lg overflow-hidden shadow-md border border-purple-100 group-hover:shadow-xl transition-all duration-300">
+            
+            {/* Image or initials */}
             <div className="relative overflow-hidden">
               <div className="w-[35mm] h-[45mm] mx-auto bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
                 {member.imageUrl ? (
@@ -86,18 +92,33 @@ const Staff = () => {
                   </div>
                 )}
               </div>
+  
+              {/* Pin-like circle top-right */}
+              <div className="absolute top-2 right-2 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center transform rotate-45 group-hover:rotate-90 transition-transform duration-300">
+                <div className="w-3 h-3 bg-white rounded-full transform -rotate-45"></div>
+              </div>
             </div>
-            <div className="p-3 text-center">
-              <h3 className="text-sm font-semibold text-gray-800 group-hover:text-purple-700 transition-colors duration-300 line-clamp-2">
+  
+            {/* Text & hover effects */}
+            <div className="p-3 text-center relative">
+              <h3 className="text-sm font-semibold text-fuchsia-600 group-hover:text-purple-700 transition-colors duration-300 line-clamp-2">
                 {member.name}
               </h3>
-              <p className="text-xs text-gray-600">{member.designation}</p>
+  
+              {/* Expanding purple underline */}
+              <div className="w-10 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto my-1 rounded-full group-hover:w-full transition-all duration-500"></div>
+  
+              <p className="text-xs text-fuchsia-600">{member.designation}</p>
             </div>
           </div>
+
+          {/* Bouncing dot positioned outside top-right of the card */}
+          <div className="absolute -top-3 -right-3 w-5 h-5 bg-gradient-to-br from-purple-300 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-bounce shadow-lg border-2 border-white"></div>
         </motion.div>
       ))}
     </motion.div>
   );
+  
 
   return (
     <Suspense fallback={<StaffSkeleton />}>
@@ -141,7 +162,7 @@ const Staff = () => {
                 Excellence in Education
               </h2>
               <p className="text-gray-700 leading-relaxed text-justify tracking-wide">
-                Our faculty members bring together decades of combined experience, advanced degrees, and a 
+                Our faculty bring together decades of combined experience, advanced degrees, and a 
                 passionate commitment to student success.
               </p>
             </div>
