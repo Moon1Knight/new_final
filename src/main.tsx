@@ -6,6 +6,20 @@ import './index.css';
 // Enable React concurrent features
 const root = createRoot(document.getElementById("root")!);
 
+// Preload critical resources
+const preloadResources = () => {
+  // Preload important images
+  const imagesToPreload = [
+    '/lovable-uploads/logo.png',
+    // Add other critical images
+  ];
+
+  imagesToPreload.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+};
+
 // Use requestIdleCallback for better performance
 if ('requestIdleCallback' in window) {
   window.requestIdleCallback(() => {
@@ -14,6 +28,7 @@ if ('requestIdleCallback' in window) {
         <App />
       </React.StrictMode>
     );
+    preloadResources();
   });
 } else {
   // Fallback for browsers that don't support requestIdleCallback
@@ -23,5 +38,6 @@ if ('requestIdleCallback' in window) {
         <App />
       </React.StrictMode>
     );
-  }, 1);
+    preloadResources();
+  }, 0);
 }
