@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Target, Eye, Heart, BookOpen, Users, Award, Lightbulb, Globe } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 // ... imports remain unchanged
 
 const OurMission = () => {
@@ -32,6 +33,7 @@ const OurMission = () => {
   
     return (
       <div>
+        <SEO/>
         <Navigation />
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50">
           <motion.section

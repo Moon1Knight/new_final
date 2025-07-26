@@ -15,6 +15,7 @@ import NoticeBoard from '@/components/NoticeBoard';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import SEO from '../components/SEO';
 
 
 
@@ -108,6 +109,14 @@ const Index = () => {
           `}
         </script>
       </Helmet>
+
+      <SEO
+        title="Best ICSE School in Rajahmundry - Avenues The Global School"
+        description="Avenues The Global School is the No.1 ICSE school in Rajahmundry and Andhra Pradesh offering Kindergarten to Higher Secondary education. A top International & Convent school with Day Boarding and Boarding options."
+        keywords="best ICSE school Rajahmundry, top schools Andhra Pradesh, international school, boarding school, day boarding, convent school, kindergarten to higher secondary, English medium school"
+        canonicalUrl="/"
+        ogType="website"
+      />
 
       {loading && <LoadingAnimation isLoading={loading} />}
 
